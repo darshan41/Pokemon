@@ -125,18 +125,18 @@ public typealias CoreDataAsynchronousFetchRequest<T: NSFetchRequestResult> = ((N
 public typealias CoreDataAsynchronousFetchResult<T: NSFetchRequestResult> = ((NSAsynchronousFetchResult<T>) -> Void)?
 
 extension NSManagedObject {
-//    
-//    @nonobjc
-//    public class func coreFetchRequest<T>(expectedType: T.Type = T.self,_ entityName: String = "\(T.self)") -> NSFetchRequest<T> {
-//        NSFetchRequest<T>(entityName: entityName)
-//    }
-//    
-//    @nonobjc
-//    public class func coreFetchAsyncRequest<T>(
-//        _ request: NSFetchRequest<T>,
-//        onCompletion: CoreDataAsynchronousFetchResult<T> = nil
-//    ) -> NSAsynchronousFetchRequest<T> {
-//        NSAsynchronousFetchRequest<T>.init(fetchRequest: request,completionBlock: onCompletion)
-//    }
+    
+    @nonobjc
+    public class func coreFetchRequest<T>(expectedType: T.Type = T.self,_ entityName: String = "\(T.self)") -> NSFetchRequest<T> {
+        NSFetchRequest<T>(entityName: entityName)
+    }
+    
+    @nonobjc
+    public class func coreFetchAsyncRequest<T>(
+        _ request: NSFetchRequest<T>,
+        onCompletion: CoreDataAsynchronousFetchResult<T> = nil
+    ) -> NSAsynchronousFetchRequest<T> {
+        NSAsynchronousFetchRequest<T>.init(fetchRequest: request,completionBlock: onCompletion)
+    }
 }
 

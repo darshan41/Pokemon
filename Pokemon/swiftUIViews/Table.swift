@@ -17,6 +17,8 @@ protocol TableObservableObject: ObservableObject {
     
     func findObjects(_ queryString: String) async -> [T]
     
+    func findObjects(_ queryString: String,onCompletion: @escaping(([T]) -> Void)) 
+    
 }
 
 struct Table<T: TableObject,E: TableObservableObject>: View where E.T == T {

@@ -12,7 +12,16 @@ import SwiftUI
 
 final class SplashView: UIViewController {
     
+    @IBOutlet private weak var gifImageView: UIImageView!
+    @IBOutlet private weak var loader: UIActivityIndicatorView!
+    
     var presenter: SplashPresenterProtocol!
+    
+    private var showLoader: Bool = false {
+        didSet {
+            showLoader ? loader.startAnimating() : loader.stopAnimating()
+        }
+    }
     
     private weak var previousViewController: UIViewController?
     
@@ -40,6 +49,7 @@ extension SplashView: SplashViewProtocol {
     }
     
     func onFailure(with error: APIManagerError) {
+        showLoader = false
         self.previousViewController?.dismiss(animated: true)
         let swiftUIErrorView = UIHostingController(rootView: ErrorView(error: error.showableDescription, title: "Retry", retryAction: { [weak self] in
             self?.presenter.getEndPoints()
@@ -54,10 +64,13 @@ extension SplashView: SplashViewProtocol {
 private extension SplashView {
     
     func configureView() {
+        let jeremyGif = UIImage.gifImageWithName("pokeball")
+        self.gifImageView.image = jeremyGif
+        showLoader = true
         view.backgroundColor = Color.fillColor(Color.currentScheme).toUIColor
-        let swiftUIView = UIHostingController(rootView: CenteredGifView())
-        ViewEmbedder.embedWithCons(parent: self, container: view, child: UINavigationController(rootViewController: swiftUIView), previous: previousViewController)
-        self.previousViewController = swiftUIView
+//        let swiftUIView = UIHostingController(rootView: CenteredGifView())
+//        ViewEmbedder.embedWithCons(parent: self, container: view, child: UINavigationController(rootViewController: swiftUIView), previous: previousViewController)
+//        self.previousViewController = swiftUIView
         presenter.getEndPoints()
     }
 }

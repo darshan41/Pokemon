@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE7053152B78AFBC000E065D /* BasicPageView in Frameworks */ = {isa = PBXBuildFile; productRef = BE7053142B78AFBC000E065D /* BasicPageView */; };
+		BE7053182B78B011000E065D /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7053172B78B011000E065D /* CustomActivityIndicator.swift */; };
+		BE70531A2B78B165000E065D /* Giffy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7053192B78B165000E065D /* Giffy.swift */; };
 		BE99D2882B752D9100F897F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99D2872B752D9100F897F0 /* AppDelegate.swift */; };
 		BE99D28A2B752D9100F897F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99D2892B752D9100F897F0 /* SceneDelegate.swift */; };
 		BE99D28F2B752D9100F897F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE99D28D2B752D9100F897F0 /* Main.storyboard */; };
@@ -61,6 +64,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE7053172B78B011000E065D /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
+		BE7053192B78B165000E065D /* Giffy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Giffy.swift; sourceTree = "<group>"; };
 		BE99D2842B752D9100F897F0 /* Pokemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE99D2872B752D9100F897F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE99D2892B752D9100F897F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,12 +127,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE99D2C62B753CB100F897F0 /* PokemonAPI in Frameworks */,
+				BE7053152B78AFBC000E065D /* BasicPageView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BE7053162B78B001000E065D /* ReuasbleUIKitViews */ = {
+			isa = PBXGroup;
+			children = (
+				BE7053172B78B011000E065D /* CustomActivityIndicator.swift */,
+				BE7053192B78B165000E065D /* Giffy.swift */,
+			);
+			path = ReuasbleUIKitViews;
+			sourceTree = "<group>";
+		};
 		BE99D27B2B752D9100F897F0 = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +162,7 @@
 		BE99D2862B752D9100F897F0 /* Pokemon */ = {
 			isa = PBXGroup;
 			children = (
+				BE7053162B78B001000E065D /* ReuasbleUIKitViews */,
 				BEDD3FCA2B781E3900B1777A /* Endorsements */,
 				BE9B84CC2B77C54E00F36097 /* Environment */,
 				BE9B84B32B77A99F00F36097 /* Reusables */,
@@ -373,6 +389,7 @@
 			name = Pokemon;
 			packageProductDependencies = (
 				BE99D2C52B753CB100F897F0 /* PokemonAPI */,
+				BE7053142B78AFBC000E065D /* BasicPageView */,
 			);
 			productName = Pokemon;
 			productReference = BE99D2842B752D9100F897F0 /* Pokemon.app */;
@@ -404,6 +421,7 @@
 			mainGroup = BE99D27B2B752D9100F897F0;
 			packageReferences = (
 				BE99D2C42B753CB100F897F0 /* XCRemoteSwiftPackageReference "PokemonAPI" */,
+				BE7053132B78AFBC000E065D /* XCRemoteSwiftPackageReference "BasicPageView" */,
 			);
 			productRefGroup = BE99D2852B752D9100F897F0 /* Products */;
 			projectDirPath = "";
@@ -470,6 +488,7 @@
 				BE9B84CB2B77BBDE00F36097 /* Species.swift in Sources */,
 				BE99D2BD2B7535B100F897F0 /* SplashRouter.swift in Sources */,
 				BE99D28A2B752D9100F897F0 /* SceneDelegate.swift in Sources */,
+				BE70531A2B78B165000E065D /* Giffy.swift in Sources */,
 				BE9B84AA2B778E5D00F36097 /* Alias.swift in Sources */,
 				BE9B84C92B77BB3F00F36097 /* Version.swift in Sources */,
 				BE9B849C2B778A1F00F36097 /* Table.swift in Sources */,
@@ -478,6 +497,7 @@
 				BE99D2C12B75364B00F897F0 /* String.swift in Sources */,
 				BE9B84A62B778E0100F36097 /* PokemonServices.swift in Sources */,
 				BE99D2A62B752E4200F897F0 /* Service.swift in Sources */,
+				BE7053182B78B011000E065D /* CustomActivityIndicator.swift in Sources */,
 				BE99D2B92B75358B00F897F0 /* SplashPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -701,6 +721,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		BE7053132B78AFBC000E065D /* XCRemoteSwiftPackageReference "BasicPageView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/darshan41/BasicPageView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		BE99D2C42B753CB100F897F0 /* XCRemoteSwiftPackageReference "PokemonAPI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kinkofer/PokemonAPI";
@@ -712,6 +740,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BE7053142B78AFBC000E065D /* BasicPageView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BE7053132B78AFBC000E065D /* XCRemoteSwiftPackageReference "BasicPageView" */;
+			productName = BasicPageView;
+		};
 		BE99D2C52B753CB100F897F0 /* PokemonAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = BE99D2C42B753CB100F897F0 /* XCRemoteSwiftPackageReference "PokemonAPI" */;

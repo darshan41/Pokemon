@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "basicpageview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/darshan41/BasicPageView.git",
+      "state" : {
+        "revision" : "e86a0f12c0a579c344eb75a6f7a8ddd731e61fca",
+        "version" : "1.0.0"
+      }
+    },
+    {
       "identity" : "pokemonapi",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kinkofer/PokemonAPI",

@@ -12,6 +12,10 @@ final class Pokemon {
     
     let pokemonAPI: PokemonAPI = PokemonAPI()
     
+    private lazy var coreDataPokemonStack: CoreDataStackManagible = {
+        CoreDataStack(model: .pokemon)
+    }()
+    
     static let shared: Pokemon = Pokemon()
     
     private init() { }

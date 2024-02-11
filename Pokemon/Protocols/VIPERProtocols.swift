@@ -7,12 +7,14 @@
 
 import UIKit
 
-public protocol ErrorShowable: Error {
+public protocol ErrorShowable: Error,LocalizedError {
     var showableDescription: String { get }
 }
 
 extension String: ErrorShowable {
     public var showableDescription: String { self }
+    
+    public var errorDescription: String? { self.showableDescription }
 }
 
 

@@ -42,7 +42,7 @@ extension SplashView: SplashViewProtocol {
     
     func onSuccess() {
         self.previousViewController?.dismiss(animated: true)
-        let object: SearchObject<Pokemonz,SplashInteractor> = SearchObject(tableObservable: self.presenter.interactor)
+        let object: SearchObject<PKPPokemon,SplashInteractor> = SearchObject(tableObservable: self.presenter.interactor)
         let swiftUIView = UIHostingController(rootView: Table(title: "Search Pokemons", searchData: object))
         ViewEmbedder.embedWithCons(parent: self, container: view, child: UINavigationController(rootViewController: swiftUIView), previous: nil)
         self.previousViewController = swiftUIView

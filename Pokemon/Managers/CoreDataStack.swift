@@ -8,6 +8,8 @@
 import UIKit
 import CoreData
 
+
+
 enum CoreDataModel: String,CaseIterable {
     case pokemon = "Pokemon"
 }
@@ -15,8 +17,9 @@ enum CoreDataModel: String,CaseIterable {
 protocol CoreDataStackManagible {
     
     var managedContext: NSManagedObjectContext { get }
+    var newBackgroundContext: NSManagedObjectContext { get }
     
-    func saveContext() -> CoreDataStack.Error?
+    func saveContext() throws
     
     var ignoreCoreDataNoChangeError: Bool { get }
     var savesChangesOnAppBackground: Bool { get }
@@ -41,10 +44,14 @@ class CoreDataStack {
             }
         })
         container.viewContext.shouldDeleteInaccessibleFaults = self.shouldDeleteInaccessibleFaults
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         return container
     }()
     
     lazy var managedContext: NSManagedObjectContext = { self.storeContainer.viewContext }()
+    
+    lazy var newBackgroundContext: NSManagedObjectContext = { self.storeContainer.newBackgroundContext() }()
+    
     
     init(model: CoreDataModel) {
         self.model = model
@@ -62,20 +69,18 @@ extension CoreDataStack: CoreDataStackManagible {
     
     // MARK: - Core Data Saving support
 
-    @discardableResult
-    func saveContext() -> CoreDataStack.Error? {
+    func saveContext() throws {
         let context = managedContext
         guard context.hasChanges else {
             if ignoreCoreDataNoChangeError {
-                return nil
+                return
             }
-            return Error.noChanges
+            throw Error.noChanges
         }
         do {
             try context.save()
-            return nil
         } catch {
-            return Error.custom(error.localizedDescription)
+            throw Error.custom(error.localizedDescription)
         }
     }
 }
@@ -87,9 +92,9 @@ private extension CoreDataStack {
     @objc func saveChanges() {
         if UIApplication.shared.applicationState == .background {
             guard savesChangesOnAppBackground else { return }
-            saveContext()
+            try? saveContext()
         } else {
-            saveContext()
+            try? saveContext()
         }
     }
 }
@@ -114,3 +119,24 @@ extension CoreDataStack {
 extension CodingUserInfoKey {
   static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
 }
+
+public typealias CoreDataAsynchronousFetchRequest<T: NSFetchRequestResult> = ((NSAsynchronousFetchRequest<T>) -> Void)?
+
+public typealias CoreDataAsynchronousFetchResult<T: NSFetchRequestResult> = ((NSAsynchronousFetchResult<T>) -> Void)?
+
+extension NSManagedObject {
+//    
+//    @nonobjc
+//    public class func coreFetchRequest<T>(expectedType: T.Type = T.self,_ entityName: String = "\(T.self)") -> NSFetchRequest<T> {
+//        NSFetchRequest<T>(entityName: entityName)
+//    }
+//    
+//    @nonobjc
+//    public class func coreFetchAsyncRequest<T>(
+//        _ request: NSFetchRequest<T>,
+//        onCompletion: CoreDataAsynchronousFetchResult<T> = nil
+//    ) -> NSAsynchronousFetchRequest<T> {
+//        NSAsynchronousFetchRequest<T>.init(fetchRequest: request,completionBlock: onCompletion)
+//    }
+}
+

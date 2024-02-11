@@ -2,9 +2,18 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="PKPPokemon" representedClassName="PKPPokemon" syncable="YES">
         <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData"/>
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <attribute name="name" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="String" defaultValueString=""/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString=""/>
         <attribute name="singlePhotoURL" optional="YES" attributeType="String"/>
         <attribute name="url" optional="YES" attributeType="String"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Pokemonz" inverseName="results" inverseEntity="Pokemonz"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Pokemonz" representedClassName="Pokemonz" syncable="YES">
+        <relationship name="results" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="PKPPokemon" inverseName="relationship" inverseEntity="PKPPokemon"/>
     </entity>
 </model>

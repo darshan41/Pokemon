@@ -13,21 +13,47 @@ class SplashInteractor  {
     
     weak var presenter: SplashInteractorOutputProtocol?
     
-    private let decoder: PokeDecoder = CorePokeDecoder(with: Pokemon.shared.currentCoreDataContext.managedContext)
+    private let decoder: PokeDecoder = CorePokeDecoder(with: Pokemon.shared.viewContext)
+    private var pokecallz: Pokemonz?
     
-    var pokemons: [Pokemonz] = []
+//    func getEndPoints() {
+//        Task.detached(priority: .background) { [weak self] in
+//            guard let self else { return }
+//            do {
+//                let services = try await PokemonServices<Services>().pokemonAPICalls(for: .service)
+//                await MainActor.run {
+//                    Constants.API.services = services
+//                }
+//                let pokecallz = try await PokemonServices<Pokemonz>().pokemonAPICalls(handler: PackedParam(for: .pokemon,decoder: self.decoder,parameters: [
+//                    .limit: "9999"
+//                ]))
+//                self.pokecallz = pokecallz
+//                try await MainActor.run {
+//                    try Pokemon.shared.currentCorePokemonDataStack.saveContext()
+//                    self.presenter?.onSuccess()
+//                }
+//            } catch {
+//                await MainActor.run {
+//                    self.presenter?.onFailure(with: error.castedToAPIManagerError)
+//                }
+//            }
+//        }
+//    }
     
     func getEndPoints() {
-        Task.detached(priority: .background) { [weak self] in
+        Task { [weak self] in
             guard let self else { return }
             do {
-                let services = try await PokemonServices<Services>().pokemonAPICalls(for: .service)
+                let services = try await PokemonServices<Services>().pokemonAPICalls(for: .service, decoder: decoder)
                 await MainActor.run {
                     Constants.API.services = services
                 }
-                let pokecallz = try await PokemonServices<Pokecallz>().pokemonAPICalls(handler: PackedParam(for: .pokemon, parameters: [.limit: "9999"]))
-                await MainActor.run {
-                    self.pokemons = pokecallz.results
+                let pokecallz = try await PokemonServices<Pokemonz>().pokemonAPICalls(handler: PackedParam(for: .pokemon,decoder: self.decoder,parameters: [
+                    .limit: "9999"
+                ]))
+                self.pokecallz = pokecallz
+                try await MainActor.run {
+                    try Pokemon.shared.currentCorePokemonDataStack.saveContext()
                     self.presenter?.onSuccess()
                 }
             } catch {
@@ -43,36 +69,23 @@ class SplashInteractor  {
 
 extension SplashInteractor: TableObservableObject {
     
-    typealias T = Pokemonz
+    typealias T = PKPPokemon
     
     func findObjects(_ queryString: String) -> [T] {
-        let lowercaseQuery = queryString.lowercased()
-        guard !queryString.isEmpty else { return pokemons }
-        let filtered = pokemons.filter { pokemon in
-            guard let text = pokemon.text?.lowercased() else {
-                return false
-            }
-            return text.localizedCaseInsensitiveContains(lowercaseQuery)
+        do {
+            let request = PKPPokemon.fetchRequest()
+            let descrtiptors = PKPPokemon.nameFilterSortPredicate(queryString)
+            request.predicate = descrtiptors.0
+            request.sortDescriptors = descrtiptors.1
+//            let newRequest = PKPPokemon.coreFetchRequest(expectedType: PKPPokemon.self)
+            let pokemons = try Pokemon.shared.viewContext.fetch(request)
+            return pokemons
+        } catch {
+            return []
         }
-        return filtered
     }
 }
 
 // MARK: Input for Interactor Protocol
 
 extension SplashInteractor: SplashInteractorInputProtocol { }
-
-struct Pokecallz: Codable {
-    let count: Int16
-    let next: String?
-    let previous: String?
-    let results: [Pokemonz]
-}
-
-struct Pokemonz: Codable,TableObject {
-    var text: String? { name }
-    var id: String { url }
-    
-    let name: String
-    let url: String
-}

@@ -21,9 +21,8 @@ enum DecoderConfigurationError: ErrorShowable {
     }
 }
 
-
 @objc(PKPPokemon)
-public final class PKPPokemon: NSManagedObject,Decodable {
+public final class PKPPokemon: NSManagedObject,Codable {
     
     enum CodingKeys: CodingKey {
         case color, id, name, singlePhotoURL, url
@@ -33,6 +32,8 @@ public final class PKPPokemon: NSManagedObject,Decodable {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             throw DecoderConfigurationError.missingManagedObjectContext
         }
+        assert(context == Pokemon.shared.viewContext)
+        assert(Pokemon.shared.currentCorePokemonDataStack.managedContext == Pokemon.shared.viewContext)
         self.init(context: context)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if let hexColorCode = try? container.decodeIfPresent(String.self, forKey: .color),let color = UIColor.init(hex: hexColorCode)  {
@@ -40,9 +41,24 @@ public final class PKPPokemon: NSManagedObject,Decodable {
         } else {
             self.color = nil
         }
-        self.id = try container.decodeIfPresent(String.self, forKey: .id)
         self.name = try container.decode(String.self, forKey: .name)
+        if let id = try container.decodeIfPresent(String.self, forKey: .id) {
+            self.id = id
+        } else {
+            self.id = name
+        }
         self.singlePhotoURL = try container.decodeIfPresent(String.self, forKey: .singlePhotoURL)
         self.url = try container.decodeIfPresent(String.self, forKey: .url)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encodeIfPresent(self.id, forKey: .id)
+        try container.encode(self.name, forKey: .name)
+        try container.encodeIfPresent(self.singlePhotoURL, forKey: .singlePhotoURL)
+        try container.encodeIfPresent(self.url, forKey: .url)
+        if let color = self.color,let hexColorCode = (color as? UIColor)?.toHexString() {
+            try container.encodeIfPresent(hexColorCode, forKey: .color)
+        }
     }
 }

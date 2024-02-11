@@ -14,9 +14,6 @@ actor PokemonServices<SomeModel: Codable> {
     var urlSession: URLSession?
     var supplementartURLRequest: URLRequest?
     var headers: BasicDict?
-    
-    lazy private var decoder: PokeDecoder = { PokeDecoder() }()
-    
 }
 
 extension PokemonServices  {
@@ -31,7 +28,7 @@ extension PokemonServices  {
     
     func pokemonAPICalls(
         for service: ServicesCodingKeys,
-        decoder: PokeDecoder? = nil,
+        decoder: PokeDecoder,
         _ urlReplacingIdentifiers: BasicDict? = nil,
         _ parameters: BasicDict? = nil
     ) async throws -> SomeModel {
@@ -55,10 +52,8 @@ extension PokemonServices  {
             urlSession,
             supplementartURLRequest
         )
-        if let decoder {
+        return try await MainActor.run(resultType: SomeModel.self) {
             return try decoder.decoded(data)
-        } else {
-            return try self.decoder.decoded(data)
         }
     }
     
@@ -69,6 +64,7 @@ extension PokemonServices  {
         self.supplementartURLRequest = paramHandler.supplementartURLRequest
         return try await self.pokemonAPICalls(
             for: paramHandler.key,
+            decoder: paramHandler.decoder,
             paramHandler.urlReplacingIdentifiers?.toParamDictionary,
             paramHandler.parameters?.toParamDictionary
         )

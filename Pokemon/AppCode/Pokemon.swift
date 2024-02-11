@@ -7,14 +7,15 @@
 
 import Foundation
 import PokemonAPI
+import CoreData
 
 final class Pokemon {
     
     let pokemonAPI: PokemonAPI = PokemonAPI()
     
-    lazy var currentCoreDataContext: CoreDataStackManagible = {
-        CoreDataStack(model: .pokemon)
-    }()
+    let currentCorePokemonDataStack: CoreDataStackManagible = CoreDataStack(model: .pokemon)
+    
+    var viewContext: NSManagedObjectContext { currentCorePokemonDataStack.managedContext }
     
     static let shared: Pokemon = Pokemon()
     

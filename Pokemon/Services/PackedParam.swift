@@ -25,18 +25,22 @@ protocol SingleParamProtocol {
 struct PackedParam  {
     
     var key: ServicesCodingKeys
+    let decoder: PokeDecoder
     var parameters: ParameterDictionary?
     var urlReplacingIdentifiers: ParameterDictionary?
     var headers: BasicDict?
     var session: URLSession?
     var supplementartURLRequest: URLRequest?
     
+    
     init(
         for key: ServicesCodingKeys,
+        decoder: PokeDecoder,
         parameters: ParameterDictionary? = nil,
         headers: BasicDict? = nil,
         urlReplacingIdentifiers: ParameterDictionary? = nil
     ) {
+        self.decoder = decoder
         self.key = key
         self.parameters = parameters
         self.headers = headers

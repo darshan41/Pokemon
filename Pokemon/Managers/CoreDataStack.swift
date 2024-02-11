@@ -120,8 +120,6 @@ extension CodingUserInfoKey {
   static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
 }
 
-public typealias CoreDataAsynchronousFetchRequest<T: NSFetchRequestResult> = ((NSAsynchronousFetchRequest<T>) -> Void)?
-
 public typealias CoreDataAsynchronousFetchResult<T: NSFetchRequestResult> = ((NSAsynchronousFetchResult<T>) -> Void)?
 
 extension NSManagedObject {
@@ -134,9 +132,31 @@ extension NSManagedObject {
     @nonobjc
     public class func coreFetchAsyncRequest<T>(
         _ request: NSFetchRequest<T>,
-        onCompletion: CoreDataAsynchronousFetchResult<T> = nil
+        onCompletion: CoreDataAsynchronousFetchResult<T>
     ) -> NSAsynchronousFetchRequest<T> {
         NSAsynchronousFetchRequest<T>.init(fetchRequest: request,completionBlock: onCompletion)
+    }
+    
+    
+    @nonobjc
+    public class func coreFetchAsyncRequest<T>(
+        _ request: NSFetchRequest<T>,
+        in context: NSManagedObjectContext
+    ) async throws -> [T] {
+        return try await withCheckedThrowingContinuation { continuation in
+            let request = NSAsynchronousFetchRequest<T>.init(fetchRequest: request) { request in
+                if let result = request.finalResult {
+                    continuation.resume(with: .success(result))
+                } else {
+                    continuation.resume(with: .failure(CoreDataStack.Error.custom("Unable to get desired Results, Something went wrong!")))
+                }
+            }
+            do {
+                try context.execute(request)
+            } catch {
+                continuation.resume(throwing: error)
+            }
+        }
     }
 }
 

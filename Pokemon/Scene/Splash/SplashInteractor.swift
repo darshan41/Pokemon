@@ -54,13 +54,13 @@ extension SplashInteractor: TableObservableObject {
     
     typealias T = PKPPokemon
     
-    func findObjects(_ queryString: String) -> [T] {
+    func findObjects(_ queryString: String) async -> [T] {
         do {
             let request = PKPPokemon.coreFetchRequest(expectedType: PKPPokemon.self)
             let descrtiptors = PKPPokemon.nameFilterSortPredicate(queryString)
             request.predicate = descrtiptors.0
             request.sortDescriptors = descrtiptors.1
-            let pokemons = try Pokemon.shared.viewContext.fetch(request)
+            let pokemons = try await PKPPokemon.coreFetchAsyncRequest(request, in: Pokemon.shared.viewContext)
             return pokemons
         } catch {
             return []

@@ -10,6 +10,8 @@
 		BE7053152B78AFBC000E065D /* BasicPageView in Frameworks */ = {isa = PBXBuildFile; productRef = BE7053142B78AFBC000E065D /* BasicPageView */; };
 		BE7053182B78B011000E065D /* CustomActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7053172B78B011000E065D /* CustomActivityIndicator.swift */; };
 		BE70531A2B78B165000E065D /* Giffy.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7053192B78B165000E065D /* Giffy.swift */; };
+		BE70532C2B78C7AE000E065D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70532B2B78C7AE000E065D /* File.swift */; };
+		BE7053302B78C82E000E065D /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE70532F2B78C82E000E065D /* CoreDataStack.swift */; };
 		BE99D2882B752D9100F897F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99D2872B752D9100F897F0 /* AppDelegate.swift */; };
 		BE99D28A2B752D9100F897F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99D2892B752D9100F897F0 /* SceneDelegate.swift */; };
 		BE99D28F2B752D9100F897F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE99D28D2B752D9100F897F0 /* Main.storyboard */; };
@@ -66,6 +68,8 @@
 /* Begin PBXFileReference section */
 		BE7053172B78B011000E065D /* CustomActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityIndicator.swift; sourceTree = "<group>"; };
 		BE7053192B78B165000E065D /* Giffy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Giffy.swift; sourceTree = "<group>"; };
+		BE70532B2B78C7AE000E065D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		BE70532F2B78C82E000E065D /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		BE99D2842B752D9100F897F0 /* Pokemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE99D2872B752D9100F897F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE99D2892B752D9100F897F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +147,14 @@
 			path = ReuasbleUIKitViews;
 			sourceTree = "<group>";
 		};
+		BE70532E2B78C829000E065D /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				BE70532F2B78C82E000E065D /* CoreDataStack.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		BE99D27B2B752D9100F897F0 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +174,7 @@
 		BE99D2862B752D9100F897F0 /* Pokemon */ = {
 			isa = PBXGroup;
 			children = (
+				BE70532E2B78C829000E065D /* Managers */,
 				BE7053162B78B001000E065D /* ReuasbleUIKitViews */,
 				BEDD3FCA2B781E3900B1777A /* Endorsements */,
 				BE9B84CC2B77C54E00F36097 /* Environment */,
@@ -290,6 +303,7 @@
 				BE9B84C02B77B76300F36097 /* jsonDecoder.swift */,
 				BE9B84D12B77DF5A00F36097 /* View.swift */,
 				BEDD3FC72B78050D00B1777A /* Color.swift */,
+				BE70532B2B78C7AE000E065D /* File.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -476,6 +490,7 @@
 				BE99D2CA2B75512B00F897F0 /* PaginatedResultsView.swift in Sources */,
 				BE9B849E2B778D9900F36097 /* PackedParam.swift in Sources */,
 				BE99D2B02B75336700F897F0 /* VIPERProtocols.swift in Sources */,
+				BE7053302B78C82E000E065D /* CoreDataStack.swift in Sources */,
 				BEDD3FC82B78050D00B1777A /* Color.swift in Sources */,
 				BE99D2B32B75347500F897F0 /* ViewEmbedder.swift in Sources */,
 				BE99D2AD2B75334200F897F0 /* SplashProtocol.swift in Sources */,
@@ -488,6 +503,7 @@
 				BE9B84CB2B77BBDE00F36097 /* Species.swift in Sources */,
 				BE99D2BD2B7535B100F897F0 /* SplashRouter.swift in Sources */,
 				BE99D28A2B752D9100F897F0 /* SceneDelegate.swift in Sources */,
+				BE70532C2B78C7AE000E065D /* File.swift in Sources */,
 				BE70531A2B78B165000E065D /* Giffy.swift in Sources */,
 				BE9B84AA2B778E5D00F36097 /* Alias.swift in Sources */,
 				BE9B84C92B77BB3F00F36097 /* Version.swift in Sources */,

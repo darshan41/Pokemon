@@ -75,7 +75,6 @@ extension CoreDataStack: CoreDataStackManagible {
             try context.save()
             return nil
         } catch {
-            let nserror = error as NSError
             return Error.custom(error.localizedDescription)
         }
     }
@@ -112,3 +111,6 @@ extension CoreDataStack {
     }
 }
 
+extension CodingUserInfoKey {
+  static let managedObjectContext = CodingUserInfoKey(rawValue: "managedObjectContext")!
+}

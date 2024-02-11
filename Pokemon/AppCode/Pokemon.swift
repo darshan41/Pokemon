@@ -12,7 +12,7 @@ final class Pokemon {
     
     let pokemonAPI: PokemonAPI = PokemonAPI()
     
-    private lazy var currentCoreDataContext: CoreDataStackManagible = {
+    lazy var currentCoreDataContext: CoreDataStackManagible = {
         CoreDataStack(model: .pokemon)
     }()
     
@@ -20,3 +20,4 @@ final class Pokemon {
     
     private init() { }
 }
+

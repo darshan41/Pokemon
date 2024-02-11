@@ -12,34 +12,6 @@ typealias APIManagerAsyncData = (data: Data,response: URLResponse)
 typealias Serviceable<T: Codable> = T
 typealias pokemonResult = Codable & ErrorCheckable
 
-struct Response<SomeDecodable: Codable>: pokemonResult {
-    
-    var success: Bool!
-    var data: SomeDecodable?
-    var error: PokemonErrorType?
-    
-    static var defaultFailureResponse: Response {
-        Response(
-            success: false,
-            data: nil,
-            error: .errString(somethingWentWrong)
-        )
-    }
-    
-    func validateResponse() -> Result<SomeDecodable,APIManagerError> {
-        if let error = self.validateError() {
-            return .failure(error)
-        }
-        if let success = success,!success {
-            return .failure(.successIsFalseInResponse)
-        } else {
-            guard let data = self.data else {
-                return .failure(.gotCorruptedData)
-            }
-            return .success(data)
-        }
-    }
-}
 
 // MARK: Rather than class expose Protocols
 
@@ -47,15 +19,14 @@ protocol APIManagerProtocol {
     
     var session: URLSession { get }
     
-    func request<SomeModel:  Codable>(
+    func request(
         _ url: URL,
-        expectingReturnType: SomeModel.Type,
         _ httpMethod: ServiceMethod,
         _ body: Data?,
         _ headers: BasicDict?,
         _ urlSession: URLSession?,
         _ supplementaryURLRequest: URLRequest?
-    ) async throws -> SomeModel
+    ) async throws -> Data
 }
 
 // MARK: cannot be inherited
@@ -80,15 +51,14 @@ final class APIManager {
 extension APIManager: APIManagerProtocol {
     
     /// will override the URL Property
-    func request<SomeModel: Codable>(
+    func request(
         _ url: URL,
-        expectingReturnType: SomeModel.Type,
         _ httpMethod: ServiceMethod,
         _ body: Data?,
         _ headers: BasicDict?,
         _ urlSession: URLSession? = nil,
         _ supplementaryURLRequest: URLRequest? = nil
-    ) async throws -> SomeModel {
+    ) async throws -> Data {
         let session = urlSession ?? session
         var request = supplementaryURLRequest ?? URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue
@@ -97,8 +67,7 @@ extension APIManager: APIManagerProtocol {
         }
         request.addHeaders(from: headers)
         do {
-            let data: SomeModel = try await self.responseHandler(session.data(for: request, delegate: nil))
-            return data
+            return try await responseHandler(session.data(for: request, delegate: nil))
         } catch let error {
             try error.codeChecker()
             throw APIManagerError.somethingWentWrong
@@ -106,25 +75,6 @@ extension APIManager: APIManagerProtocol {
     }
 }
 
-extension APIManager {
-    
-    func responseHandler<SomeModel: Codable>(_ asyncResponsiveData: APIManagerAsyncData) async throws -> SomeModel {
-        guard let response = asyncResponsiveData.response as? HTTPURLResponse else {
-            throw APIManagerError.conversionFailedToHTTPURLResponse
-        }
-        return try await decode(data: asyncResponsiveData.data,resposne: response)
-    }
-    
-    func decode<SomeModel: Codable>(data: Data,resposne: HTTPURLResponse) async throws -> SomeModel {
-        debugPrint("The Data Fed To Decoder format is of \(String(describing: SomeModel.self))")
-        debugPrint("""
-URL: \(resposne.url?.absoluteString ?? "None"),
-StatusCode: \(resposne.statusCode)
-"""
-        )
-        return try self.decoder.decode(SomeModel.self, from: data)
-    }
-}
 
 // MARK: Helper func's
 
@@ -144,71 +94,14 @@ extension HTTPURLResponse {
 
 extension APIManager {
     
-    // MARK: Handling Decoding Part and error part via Response(Required Struct which Conforms To ErrorCheckable)
-    
-    func responseHandler<SomeModel: Codable>(
-        _ responseData: (URLResponse?,(Data?,Error?)),
-        onCompletion: PokemonResult<SomeModel>
-    )  {
-        guard let response = responseData.0 as? HTTPURLResponse else {
-            if let error = responseData.1.1 {
-                do {
-                    try error.codeChecker()
-                    return
-                } catch {
-                    onCompletion(.failure(error.castedToAPIManagerError))
-                }
-            } else {
-                onCompletion(.failure(.conversionFailedToHTTPURLResponse))
-            }
-            return
+    func responseHandler(_ asyncResponsiveData: APIManagerAsyncData) async throws -> Data {
+        guard let response = asyncResponsiveData.response as? HTTPURLResponse else {
+            throw APIManagerError.conversionFailedToHTTPURLResponse
         }
-        do {
-            if isDeveloperMode {
-                try response.statusCodeChecker()
-                if let error = responseData.1.1 {
-                    onCompletion(.failure(error.castedToAPIManagerError))
-                } else {
-                    onCompletion(decode(data: responseData.1.0))
-                }
-            } else {
-                if let error = responseData.1.1 {
-                    onCompletion(.failure(error.castedToAPIManagerError))
-                    return
-                } else {
-                    let decodedData: Result<SomeModel,APIManagerError> = decode(data: responseData.1.0)
-                    switch decodedData {
-                    case .success(let success):
-                        onCompletion(.success(success))
-                        return
-                    case .failure(let failure):
-                        onCompletion(.failure(failure))
-                        return
-                    }
-                }
-//                try response.statusCodeChecker()
-            }
-        } catch let error {
-            onCompletion(.failure(error.castedToAPIManagerError))
-            return
-        }
+        return asyncResponsiveData.data
+//        return try await decode(data: asyncResponsiveData.data,resposne: response)
     }
     
-    func decode<SomeModel: Codable>(
-        data: Data?,
-        expectingType: SomeModel.Type = SomeModel.self
-    ) -> Result<SomeModel,APIManagerError> {
-        guard let data else {
-            return .failure(.gotCorruptedData)
-        }
-        debugPrint("The Data Fed To Decoder format is of \(String(describing: SomeModel.self))")
-        do {
-            let model: SomeModel = try decoder.decode(SomeModel.self, from: data)
-            return .success(model)
-        } catch {
-            return .failure(.invalidJSONFormat(error: error.localizedDescription))
-        }
-    }
 }
 
 // MARK: ErrorWithCode XTension

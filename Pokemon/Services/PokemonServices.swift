@@ -15,6 +15,8 @@ actor PokemonServices<SomeModel: Codable> {
     var supplementartURLRequest: URLRequest?
     var headers: BasicDict?
     
+    lazy private var decoder: PokeDecoder = { PokeDecoder() }()
+    
 }
 
 extension PokemonServices  {
@@ -29,6 +31,7 @@ extension PokemonServices  {
     
     func pokemonAPICalls(
         for service: ServicesCodingKeys,
+        decoder: PokeDecoder? = nil,
         _ urlReplacingIdentifiers: BasicDict? = nil,
         _ parameters: BasicDict? = nil
     ) async throws -> SomeModel {
@@ -44,27 +47,18 @@ extension PokemonServices  {
         )
         let httpMethod = serviceInfo.serviceMethod ?? .Get
         print("👻",url.absoluteString)
-        switch httpMethod {
-        case .Get:
-            return try await shared.request(
-                url,
-                expectingReturnType: SomeModel.self,
-                httpMethod,
-                nil,
-                headers,
-                urlSession,
-                supplementartURLRequest
-            )
-        case .Post,.Delete,.Put:
-            return try await shared.request(
-                url,
-                expectingReturnType: SomeModel.self,
-                httpMethod,
-                try parameters?.serialize(),
-                headers,
-                urlSession,
-                supplementartURLRequest
-            )
+        let data = try await shared.request(
+            url,
+            httpMethod,
+            httpMethod == .Get ? nil : try parameters?.serialize(),
+            headers,
+            urlSession,
+            supplementartURLRequest
+        )
+        if let decoder {
+            return try decoder.decoded(data)
+        } else {
+            return try self.decoder.decoded(data)
         }
     }
     
@@ -79,4 +73,8 @@ extension PokemonServices  {
             paramHandler.parameters?.toParamDictionary
         )
     }
+}
+
+extension PokemonServices {
+    
 }

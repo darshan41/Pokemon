@@ -13,6 +13,8 @@ class SplashInteractor  {
     
     weak var presenter: SplashInteractorOutputProtocol?
     
+    private let decoder: PokeDecoder = CorePokeDecoder(with: Pokemon.shared.currentCoreDataContext.managedContext)
+    
     var pokemons: [Pokemonz] = []
     
     func getEndPoints() {

@@ -66,28 +66,6 @@ extension SplashInteractor: TableObservableObject {
             return []
         }
     }
-    
-    func findObjects(
-        _ queryString: String,
-        onCompletion: @escaping (([PKPPokemon]) -> Void)
-    ) {
-        let request = PKPPokemon.coreFetchRequest(expectedType: PKPPokemon.self)
-        let descrtiptors = PKPPokemon.nameFilterSortPredicate(queryString)
-        request.predicate = descrtiptors.0
-        request.sortDescriptors = descrtiptors.1
-        let newAsyncRequest = PKPPokemon.coreFetchAsyncRequest(request) { result in
-            if let pokemons = result.finalResult {
-                onCompletion(pokemons)
-            } else {
-                onCompletion([])
-            }
-        }
-        do {
-            try Pokemon.shared.viewContext.execute(newAsyncRequest)
-        } catch {
-            onCompletion([])
-        }
-    }
 }
 
 // MARK: Input for Interactor Protocol

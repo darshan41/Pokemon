@@ -137,7 +137,6 @@ extension NSManagedObject {
         NSAsynchronousFetchRequest<T>.init(fetchRequest: request,completionBlock: onCompletion)
     }
     
-    
     @nonobjc
     public class func coreFetchAsyncRequest<T>(
         _ request: NSFetchRequest<T>,

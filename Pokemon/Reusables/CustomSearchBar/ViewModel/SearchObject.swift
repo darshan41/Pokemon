@@ -22,8 +22,5 @@ class SearchObject<T: TableObject,E: TableObservableObject>: ObservableObject wh
     
     func find() async {
         self.searchedObjects = await tableObservable?.findObjects(query) ?? []
-//        tableObservable?.findObjects(query, onCompletion: { [weak self] objects  in
-//            self?.searchedObjects = objects
-//        })
     }
 }

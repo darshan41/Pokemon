@@ -9,7 +9,7 @@ import UIKit
 
 class RingedCircleView: UIView {
     
-    var fillingColor: UIColor = UIColor.black.withAlphaComponent(0.6) {
+    var fillingColor: UIColor = UIColor.black.withAlphaComponent(0.3) {
         didSet {
             setNeedsDisplay()
         }
@@ -25,10 +25,10 @@ class RingedCircleView: UIView {
         let outerPath = UIBezierPath(arcCenter: outerCenter, radius: outerRadius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
         fillingColor.setFill()
         outerPath.fill()
-        let innerRadius: CGFloat = outerRadius * 0.6
+        let innerRadius: CGFloat = outerRadius * 0.7
         let innerPath = UIBezierPath(arcCenter: outerCenter, radius: innerRadius, startAngle: 0, endAngle: CGFloat.pi * 2, clockwise: true)
-        UIColor.clear.setFill()
-        innerPath.fill()
+//        UIColor.clear.setFill()
+//        innerPath.fill()
         context.addPath(innerPath.cgPath)
         context.clip()
         context.clear(rect)

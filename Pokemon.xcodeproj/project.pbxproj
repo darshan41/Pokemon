@@ -31,6 +31,7 @@
 		BE734AF22B823CD800DB9EE9 /* Info.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE734AF12B823CD800DB9EE9 /* Info.storyboard */; };
 		BE734AF42B82598A00DB9EE9 /* PokeInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE734AF32B82598A00DB9EE9 /* PokeInfoModel.swift */; };
 		BE734AF62B825C7D00DB9EE9 /* RingedCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE734AF52B825C7D00DB9EE9 /* RingedCircleView.swift */; };
+		BE734AF82B82639300DB9EE9 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE734AF72B82639300DB9EE9 /* UILabel.swift */; };
 		BE99D2882B752D9100F897F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99D2872B752D9100F897F0 /* AppDelegate.swift */; };
 		BE99D28A2B752D9100F897F0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE99D2892B752D9100F897F0 /* SceneDelegate.swift */; };
 		BE99D28F2B752D9100F897F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE99D28D2B752D9100F897F0 /* Main.storyboard */; };
@@ -108,6 +109,7 @@
 		BE734AF12B823CD800DB9EE9 /* Info.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Info.storyboard; sourceTree = "<group>"; };
 		BE734AF32B82598A00DB9EE9 /* PokeInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeInfoModel.swift; sourceTree = "<group>"; };
 		BE734AF52B825C7D00DB9EE9 /* RingedCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RingedCircleView.swift; sourceTree = "<group>"; };
+		BE734AF72B82639300DB9EE9 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		BE99D2842B752D9100F897F0 /* Pokemon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pokemon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE99D2872B752D9100F897F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE99D2892B752D9100F897F0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -408,6 +410,7 @@
 				BE9B84D12B77DF5A00F36097 /* View.swift */,
 				BEDD3FC72B78050D00B1777A /* Color.swift */,
 				BE70532B2B78C7AE000E065D /* Notification.swift */,
+				BE734AF72B82639300DB9EE9 /* UILabel.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				BE99D2B32B75347500F897F0 /* ViewEmbedder.swift in Sources */,
 				BE99D2AD2B75334200F897F0 /* SearchProtocol.swift in Sources */,
 				BE9B84C32B77B81A00F36097 /* Ability.swift in Sources */,
+				BE734AF82B82639300DB9EE9 /* UILabel.swift in Sources */,
 				BE9B84D22B77DF5A00F36097 /* View.swift in Sources */,
 				BE9B84B22B77A90700F36097 /* PublicProtocols.swift in Sources */,
 				BE99D2882B752D9100F897F0 /* AppDelegate.swift in Sources */,

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class PokeInfoView: UIViewController {
     
@@ -14,7 +15,6 @@ class PokeInfoView: UIViewController {
     @IBOutlet private weak var pokemonName: UILabel!
     @IBOutlet private weak var pokemonImage: UIImageView!
     @IBOutlet private weak var pokemonSmallDescription: UILabel!
-    
     
     private var pokeInfoModel: PokeInfoModel!
     private weak var pkpPokemon: PKPPokemon?
@@ -32,7 +32,6 @@ class PokeInfoView: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.title = pkpPokemon?.name
         self.navigationController?.isNavigationBarHidden = false
     }
     
@@ -57,8 +56,10 @@ class PokeInfoView: UIViewController {
 private extension PokeInfoView {
     
     func configureView() {
-        pokemonName.isHidden = true
         let pokeInfoModel = PokeInfoModel(pkpPokemon: pkpPokemon)
+        self.title = pkpPokemon?.hashedID
+        pokemonName.textColor = .oppositeAccent
+        pokemonSmallDescription.textColor = .oppositeAccent
         self.pokeInfoModel = pokeInfoModel
         pokeInfoModel.onStateChange = { [weak self] state in
             guard let self else { return }
@@ -66,18 +67,22 @@ private extension PokeInfoView {
             case .loading:
                 self.showLoader = true
             case .success:
-                self.showLoader = false
+                self.onSuccessOfGettingInfo()
             case .failure(let error):
                 showAlert(title: error, positiveTapWithTitle: ("Reload", { [weak self] in
                     guard let self else { return }
-                    
+                    self.pokeInfoModel.getInformation()
                 }), negativeTapWithTitle: ("Go Back", { [weak self] in
                     guard let self else { return }
                     self.navigationController?.popViewController(animated: true)
                 }), positiveButtonStyle: .default, negativeButtonStyle: .default)
             }
         }
-        
+        pokeInfoModel.getInformation()
     }
     
+    func onSuccessOfGettingInfo() {
+        self.showLoader = false
+        pokemonName.setText(pkpPokemon?.name)
+    }
 }

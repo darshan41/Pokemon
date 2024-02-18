@@ -9,11 +9,36 @@ import UIKit
 
 class PokeInfoView: UIViewController {
     
-    var pkpPokemon: PKPPokemon?
+    @IBOutlet private weak var loader: CustomActivityIndicator!
+    @IBOutlet private weak var ringedCircularView: RingedCircleView!
+    @IBOutlet private weak var pokemonName: UILabel!
+    @IBOutlet private weak var pokemonImage: UIImageView!
+    @IBOutlet private weak var pokemonSmallDescription: UILabel!
+    
+    
+    private var pokeInfoModel: PokeInfoModel!
+    private weak var pkpPokemon: PKPPokemon?
+    
+    private var showLoader: Bool = false {
+        didSet {
+            showLoader ? loader.startAnimating() : loader.stopAnimating()
+        }
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.title = pkpPokemon?.name
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     class func create(with pkpPokemon: PKPPokemon) -> PokeInfoView {
@@ -32,6 +57,27 @@ class PokeInfoView: UIViewController {
 private extension PokeInfoView {
     
     func configureView() {
+        pokemonName.isHidden = true
+        let pokeInfoModel = PokeInfoModel(pkpPokemon: pkpPokemon)
+        self.pokeInfoModel = pokeInfoModel
+        pokeInfoModel.onStateChange = { [weak self] state in
+            guard let self else { return }
+            switch state {
+            case .loading:
+                self.showLoader = true
+            case .success:
+                self.showLoader = false
+            case .failure(let error):
+                showAlert(title: error, positiveTapWithTitle: ("Reload", { [weak self] in
+                    guard let self else { return }
+                    
+                }), negativeTapWithTitle: ("Go Back", { [weak self] in
+                    guard let self else { return }
+                    self.navigationController?.popViewController(animated: true)
+                }), positiveButtonStyle: .default, negativeButtonStyle: .default)
+            }
+        }
         
     }
+    
 }

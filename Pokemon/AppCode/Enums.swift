@@ -26,6 +26,13 @@ public enum AppStoryBoard: String {
     }
 }
 
+enum MServiceState {
+    case loading
+    case success
+    case failure(ErrorShowable)
+}
+
+
 enum ErrorMessages: ErrorShowable {
     
     case somethingWentWrong

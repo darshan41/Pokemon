@@ -23,14 +23,96 @@
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="color" name="pikapikaYellow"/>
                             </activityIndicatorView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQm-qv-vn6">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3fT-NU-8sX" userLabel="TopView">
+                                        <rect key="frame" x="20" y="0.0" width="353" height="852"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TXO-fG-u0w" customClass="RingedCircleView" customModule="Pokemon" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="353" height="353"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo.artframe" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="cN8-xS-lwW">
+                                                        <rect key="frame" x="164.66666666666666" y="168" width="23.666666666666657" height="17.333333333333343"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="tintColor" name="pikapikaYellow"/>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="cN8-xS-lwW" firstAttribute="centerX" secondItem="TXO-fG-u0w" secondAttribute="centerX" id="Ldl-03-sVd"/>
+                                                    <constraint firstItem="cN8-xS-lwW" firstAttribute="width" relation="lessThanOrEqual" secondItem="TXO-fG-u0w" secondAttribute="width" multiplier="0.8" id="ZGc-xy-mRA"/>
+                                                    <constraint firstItem="cN8-xS-lwW" firstAttribute="height" relation="lessThanOrEqual" secondItem="TXO-fG-u0w" secondAttribute="height" multiplier="0.8" priority="900" id="xf2-0I-MPV"/>
+                                                    <constraint firstItem="cN8-xS-lwW" firstAttribute="centerY" secondItem="TXO-fG-u0w" secondAttribute="centerY" id="yEA-1p-KUr"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H8E-M3-04o">
+                                                <rect key="frame" x="149.66666666666666" y="297.66666666666669" width="53.666666666666657" height="55.333333333333314"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eh4-8T-I2T">
+                                                        <rect key="frame" x="0.0" y="0.0" width="53.666666666666664" height="26.333333333333332"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                                        <nil key="textColor"/>
+                                                        <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="shadowColor" name="AccentColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHF-e3-W2h">
+                                                        <rect key="frame" x="0.0" y="36.333333333333314" width="53.666666666666664" height="19"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                        <nil key="textColor"/>
+                                                        <color key="highlightedColor" name="AccentColor"/>
+                                                        <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="TXO-fG-u0w" firstAttribute="top" secondItem="3fT-NU-8sX" secondAttribute="top" id="0gK-wD-nJO"/>
+                                            <constraint firstItem="H8E-M3-04o" firstAttribute="top" relation="greaterThanOrEqual" secondItem="cN8-xS-lwW" secondAttribute="bottom" constant="20" id="8py-9q-eKd"/>
+                                            <constraint firstItem="TXO-fG-u0w" firstAttribute="centerX" secondItem="3fT-NU-8sX" secondAttribute="centerX" id="Aa3-td-avn"/>
+                                            <constraint firstItem="TXO-fG-u0w" firstAttribute="width" secondItem="3fT-NU-8sX" secondAttribute="width" id="Q9E-QZ-lEF"/>
+                                            <constraint firstItem="H8E-M3-04o" firstAttribute="width" relation="lessThanOrEqual" secondItem="TXO-fG-u0w" secondAttribute="width" multiplier="0.75" id="Wtf-DK-OMU"/>
+                                            <constraint firstItem="H8E-M3-04o" firstAttribute="centerX" secondItem="TXO-fG-u0w" secondAttribute="centerX" id="dyb-a4-WqT"/>
+                                            <constraint firstItem="H8E-M3-04o" firstAttribute="bottom" secondItem="TXO-fG-u0w" secondAttribute="bottom" id="lKE-sy-ep6"/>
+                                            <constraint firstAttribute="width" secondItem="TXO-fG-u0w" secondAttribute="height" multiplier="1:1" id="w9G-HL-AWG"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="3fT-NU-8sX" firstAttribute="top" secondItem="AQm-qv-vn6" secondAttribute="top" id="2Fk-T1-9Od"/>
+                                    <constraint firstAttribute="trailing" secondItem="3fT-NU-8sX" secondAttribute="trailing" constant="20" id="5Ia-K1-x8k"/>
+                                    <constraint firstAttribute="bottom" secondItem="3fT-NU-8sX" secondAttribute="bottom" id="YVo-2R-npv"/>
+                                    <constraint firstItem="3fT-NU-8sX" firstAttribute="leading" secondItem="AQm-qv-vn6" secondAttribute="leading" constant="20" id="rTz-Y4-ppE"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
                             <constraint firstItem="K6s-YP-cT0" firstAttribute="centerY" secondItem="vDu-zF-Fre" secondAttribute="centerY" id="3KC-wu-KQL"/>
+                            <constraint firstItem="AQm-qv-vn6" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="NyI-Tx-nMe"/>
                             <constraint firstItem="K6s-YP-cT0" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="TPf-8F-Xsa"/>
+                            <constraint firstItem="AQm-qv-vn6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cmp-tb-m91"/>
+                            <constraint firstItem="3fT-NU-8sX" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" priority="500" id="cyw-cM-hkS"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="AQm-qv-vn6" secondAttribute="trailing" id="hmC-K4-Wbv"/>
+                            <constraint firstItem="3fT-NU-8sX" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" constant="-40" id="pXA-sL-sSS"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="AQm-qv-vn6" secondAttribute="bottom" id="ui7-hY-y4W"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loader" destination="K6s-YP-cT0" id="zpa-Al-wWk"/>
+                        <outlet property="pokemonImage" destination="cN8-xS-lwW" id="Rz5-Ci-10d"/>
+                        <outlet property="pokemonName" destination="Eh4-8T-I2T" id="hhg-wR-bog"/>
+                        <outlet property="pokemonSmallDescription" destination="UHF-e3-W2h" id="iku-6u-c8Y"/>
+                        <outlet property="ringedCircularView" destination="TXO-fG-u0w" id="2Ua-fB-9As"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -38,6 +120,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="photo.artframe" catalog="system" width="128" height="93"/>
+        <namedColor name="AccentColor">
+            <color red="0.96078431372549022" green="0.9882352941176471" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="pikapikaYellow">
             <color red="0.98431372549019602" green="0.792156862745098" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

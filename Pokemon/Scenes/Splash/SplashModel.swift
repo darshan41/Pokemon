@@ -9,15 +9,9 @@ import Foundation
 
 class SplashModel {
     
-    enum ServiceState {
-        case loading
-        case success
-        case failure(ErrorShowable)
-    }
-    
     private let decoder: PokeDecoder = Pokemon.shared.pokeDecoder
     
-    var onStateChange: (((ServiceState)) -> Void)?
+    var onStateChange: (((MServiceState)) -> Void)?
     
 }
 

@@ -64,6 +64,14 @@ public final class PKPPokemon: NSManagedObject,Codable {
     }
 }
 
+extension PKPPokemon {
+    
+    var preferredImageURLString: String? {
+        guard let id else { return nil }
+        return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/\(id).svg"
+    }
+}
+
 extension String? {
     
     var extractedPokemonID: String? {

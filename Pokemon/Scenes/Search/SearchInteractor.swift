@@ -1,5 +1,5 @@
 //
-//  Splashinteractor.swift
+//  Searchinteractor.swift
 //  Pokemon
 //
 //  Created by Darshan S on 08/02/24.
@@ -11,7 +11,7 @@ import PokemonAPI
 
 class SplashInteractor  {
     
-    weak var presenter: SplashInteractorOutputProtocol?
+    weak var presenter: SearchInteractorOutputProtocol?
     
     private let decoder: PokeDecoder = CorePokeDecoder(with: Pokemon.shared.viewContext)
     private var pokecallz: Pokemonz?
@@ -20,10 +20,6 @@ class SplashInteractor  {
         Task.detached(priority: .background) { [weak self] in
             guard let self else { return }
             do {
-                let services = try await PokemonServices<Services>().pokemonAPICalls(for: .service, decoder: decoder)
-                await MainActor.run {
-                    Constants.API.services = services
-                }
                 if Pokemon.shared.refresher.shouldUpdateCoreData(for: .service) {
                     let pokecallz = try await PokemonServices<Pokemonz>().pokemonAPICalls(handler: PackedParam(for: .pokemon,decoder: self.decoder,parameters: [
                         .limit: "9999"
@@ -70,4 +66,4 @@ extension SplashInteractor: TableObservableObject {
 
 // MARK: Input for Interactor Protocol
 
-extension SplashInteractor: SplashInteractorInputProtocol { }
+extension SplashInteractor: SearchInteractorInputProtocol { }

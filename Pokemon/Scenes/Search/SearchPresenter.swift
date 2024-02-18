@@ -1,5 +1,5 @@
 //
-//  SplashPresenter.swift
+//  SearchPresenter.swift
 //  Pokemon
 //
 //  Created by Darshan S on 08/02/24.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-class SplashPresenter: SplashPresenterProtocol {
+class SplashPresenter: SearchPresenterProtocol {
     
-    weak var view: SplashViewProtocol?
+    weak var view: SearchViewProtocol?
     let interactor: SplashInteractor
-    let router: SplashRouterProtocol
+    let router: SearchRouterProtocol
     
-    init(interactor: SplashInteractor,router: SplashRouterProtocol) {
+    init(interactor: SplashInteractor,router: SearchRouterProtocol) {
         self.interactor = interactor
         self.router = router
     }
@@ -21,7 +21,7 @@ class SplashPresenter: SplashPresenterProtocol {
 
 // MARK: Interactor's Output
 
-extension SplashPresenter: SplashInteractorOutputProtocol {
+extension SplashPresenter: SearchInteractorOutputProtocol {
     
     func onSuccess() {
         view?.onSuccess()

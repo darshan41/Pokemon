@@ -9,24 +9,32 @@ import Foundation
 import PokemonAPI
 import CoreData
 
-final class Pokemon {
-    
-    let pokemonAPI: PokemonAPI = PokemonAPI()
+@globalActor 
+struct GlobaSharedResource {
+    static let shared: Pokemon = .shared
+}
+
+actor Pokemon {
     
     let refresher: CoreDataRefresher = CoreDataRefresher()
     
     let currentCorePokemonDataStack: CoreDataStackManagible = CoreDataStack(model: .pokemon)
     
+    nonisolated
     var viewContext: NSManagedObjectContext { currentCorePokemonDataStack.managedContext }
+    
+    nonisolated
+    lazy var pokeDecoder: PokeDecoder = { CorePokeDecoder(with: viewContext) }()
     
     static let shared: Pokemon = Pokemon()
     
     private init() { }
 }
 
+
 class CoreDataRefresher {
     
-    let defaults: UserDefaults = .standard
+    private let defaults: UserDefaults = .standard
     
     private func key(for service: ServicesCodingKeys) -> String {
         return "CoreDataRefresher." + service.rawValue

@@ -1,5 +1,5 @@
 //
-//  SplashView.swift
+//  SearchView.swift
 //  Pokemon
 //
 //  Created by Darshan S on 08/02/24.
@@ -10,12 +10,13 @@
 import UIKit
 import SwiftUI
 
-final class SplashView: UIViewController {
+final class SearchView: UIViewController,MainNavigable {
     
-    @IBOutlet private weak var gifImageView: UIImageView!
+    weak var mainDelegate: MainDelegte?
+    
     @IBOutlet private weak var loader: UIActivityIndicatorView!
     
-    var presenter: SplashPresenterProtocol!
+    var presenter: SearchPresenterProtocol!
     
     private var showLoader: Bool = false {
         didSet {
@@ -38,7 +39,7 @@ final class SplashView: UIViewController {
 
 // MARK: Presenter to View Protocol
 
-extension SplashView: SplashViewProtocol {
+extension SearchView: SearchViewProtocol {
     
     func onSuccess() {
         self.previousViewController?.dismiss(animated: true)
@@ -61,12 +62,11 @@ extension SplashView: SplashViewProtocol {
 
 // MARK: Helper func's
 
-private extension SplashView {
+private extension SearchView {
     
     func configureView() {
-        let jeremyGif = UIImage.gifImageWithName("pokeball")
-        self.gifImageView.image = jeremyGif
         showLoader = true
+        self.navigationController?.isNavigationBarHidden = true
         view.backgroundColor = Color.fillColor(Color.currentScheme).toUIColor
 //        let swiftUIView = UIHostingController(rootView: CenteredGifView())
 //        ViewEmbedder.embedWithCons(parent: self, container: view, child: UINavigationController(rootViewController: swiftUIView), previous: previousViewController)

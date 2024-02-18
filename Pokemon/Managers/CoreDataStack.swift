@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  CoreDataStackManagible.swift
 //  Pokemon
 //
 //  Created by Darshan S on 11/02/24.
@@ -8,13 +8,11 @@
 import UIKit
 import CoreData
 
-
-
 enum CoreDataModel: String,CaseIterable {
     case pokemon = "Pokemon"
 }
 
-protocol CoreDataStackManagible {
+protocol CoreDataStackManagible: AnyObject {
     
     var managedContext: NSManagedObjectContext { get }
     var newBackgroundContext: NSManagedObjectContext { get }

@@ -27,6 +27,8 @@ struct Table<T: TableObject,E: TableObservableObject>: View where E.T == T {
     @StateObject var searchData: SearchObject<T,E>
     
     @State private var shouldHide: Bool = false
+    
+    var onTap: ((T) -> Void)?
         
     var body: some View {
         VStack {
@@ -37,7 +39,7 @@ struct Table<T: TableObject,E: TableObservableObject>: View where E.T == T {
                     .opacity(shouldHide ? 0 : 1)
                     .animation(.easeInOut, value: 1)
             }
-            CustomSearchBar<T, E>(searchData: searchData) { yOffset in
+            CustomSearchBar<T, E>(searchData: searchData, onContentOffSetYChange: { yOffset in
                 if yOffset > 100 {
                     if shouldHide { return }
                     withAnimation {
@@ -49,7 +51,7 @@ struct Table<T: TableObject,E: TableObservableObject>: View where E.T == T {
                         shouldHide = false
                     }
                 }
-            }
+            }, onTap: onTap)
             Spacer()
         }
         .background(Color.fillColor(colorScheme))

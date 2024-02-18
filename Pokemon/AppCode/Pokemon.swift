@@ -52,4 +52,8 @@ class CoreDataRefresher {
     func setLastUpdatedData(for service: ServicesCodingKeys) {
         defaults.setValue(Date(), forKey: key(for: service))
     }
+    
+    func removeLastUpdatedData(for service: ServicesCodingKeys) {
+        defaults.setValue(nil, forKey: key(for: service))
+    }
 }

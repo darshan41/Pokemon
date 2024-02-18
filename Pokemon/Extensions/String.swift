@@ -20,6 +20,10 @@ extension String {
 extension String? {
     
     var isValidString: Bool { (self != nil) && self!.isValid  }
+    
+    var asURL: URL? {
+        self == nil ? nil : URL(string: self!)
+    }
 }
 
 extension String {
@@ -146,14 +150,6 @@ extension Optional where Wrapped == String {
     
     var firstOne: String? {
         self == nil ? nil : String((self?.first)!)
-    }
-    
-    var asURL: URL? {
-        if let wrapped = self {
-            return URL(string: wrapped)
-        } else {
-            return nil
-        }
     }
 }
 

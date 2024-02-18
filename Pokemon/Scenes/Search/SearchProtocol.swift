@@ -8,7 +8,7 @@
 import UIKit
 import PokemonAPI
 
-protocol SearchViewProtocol: AnyObject {
+protocol SearchViewProtocol: AnyObject,AnyVIPView {
     
     var presenter: SearchPresenterProtocol! { get set }
     
@@ -35,12 +35,18 @@ protocol SearchPresenterProtocol: AnyObject {
     var router: SearchRouterProtocol { get }
     
     func getEndPoints()
+    
+    func navigateToInfoView(with pkpPokemon: PKPPokemon)
 }
 
 extension SearchPresenterProtocol {
     
     func getEndPoints() {
         interactor.getEndPoints()
+    }
+    
+    func navigateToInfoView(with pkpPokemon: PKPPokemon) {
+        router.navigateToInfoView(from: view, with: pkpPokemon)
     }
 }
 
@@ -56,6 +62,14 @@ protocol SearchInteractorOutputProtocol: AnyObject {
 
 protocol SearchRouterProtocol: AnyObject {
     
+    func navigateToInfoView(from view: AnyVIPView?,with pkpPokemon: PKPPokemon)
+}
+
+extension SearchRouterProtocol {
+    
+    func navigateToInfoView(from view: AnyVIPView?,with pkpPokemon: PKPPokemon) {
+        view?.navigationController?.pushViewController(PokeInfoView.create(with: pkpPokemon), animated: true)
+    }
 }
 
 protocol PokemonGettable: AnyObject,ObservableObject {

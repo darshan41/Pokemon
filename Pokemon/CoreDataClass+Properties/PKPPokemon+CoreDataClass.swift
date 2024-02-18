@@ -41,14 +41,15 @@ public final class PKPPokemon: NSManagedObject,Codable {
         } else {
             self.color = nil
         }
+        self.url = try container.decodeIfPresent(String.self, forKey: .url)
         self.name = try container.decode(String.self, forKey: .name)
+        self.url = try container.decodeIfPresent(String.self, forKey: .url)
         if let id = try container.decodeIfPresent(String.self, forKey: .id) {
             self.id = id
         } else {
-            self.id = name
+            self.id = url.extractedPokemonID
         }
         self.singlePhotoURL = try container.decodeIfPresent(String.self, forKey: .singlePhotoURL)
-        self.url = try container.decodeIfPresent(String.self, forKey: .url)
     }
     
     public func encode(to encoder: Encoder) throws {
@@ -60,5 +61,15 @@ public final class PKPPokemon: NSManagedObject,Codable {
         if let color = self.color,let hexColorCode = (color as? UIColor)?.toHexString() {
             try container.encodeIfPresent(hexColorCode, forKey: .color)
         }
+    }
+}
+
+extension String? {
+    
+    var extractedPokemonID: String? {
+        guard let url = self.asURL else { return nil }
+        let pathComponents = url.pathComponents
+        guard let lastComponent = pathComponents.last, pathComponents.count >= 2,let intId = Int(lastComponent) else { return nil }
+        return String(intId)
     }
 }

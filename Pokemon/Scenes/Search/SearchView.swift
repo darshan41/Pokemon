@@ -46,7 +46,9 @@ extension SearchView: SearchViewProtocol {
     func onSuccess() {
         self.previousViewController?.dismiss(animated: true)
         let object: SearchObject<PKPPokemon,SplashInteractor> = SearchObject(tableObservable: self.presenter.interactor)
-        let swiftUIView = UIHostingController(rootView: Table(title: "Search Pokemons", searchData: object))
+        let swiftUIView = UIHostingController(rootView: Table(title: "Search Pokemons", searchData: object,onTap: { [weak self] pkpPokemon in
+            self?.presenter.navigateToInfoView(with: pkpPokemon)
+        }))
         ViewEmbedder.embedWithCons(parent: self, container: view, child: UINavigationController(rootViewController: swiftUIView), previous: nil)
         self.previousViewController = swiftUIView
     }

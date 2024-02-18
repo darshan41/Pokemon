@@ -21,6 +21,7 @@ struct CustomSearchBar<T: TableObject,E: TableObservableObject>: View where E.T 
     @ObservedObject var searchData: SearchObject<T,E>
     
     var onContentOffSetYChange: ((CGFloat) -> Void)?
+    var onTap: ((T) -> Void)?
     
     @State private var offset = CGFloat.zero
     
@@ -53,6 +54,9 @@ struct CustomSearchBar<T: TableObject,E: TableObservableObject>: View where E.T 
                                 Divider()
                                     .background(fillColor)
                             }
+                            .onTapGesture {
+                                onTap?(object)
+                            }
                             .padding(.horizontal)
                         }
                     }.padding(.top)
@@ -63,7 +67,8 @@ struct CustomSearchBar<T: TableObject,E: TableObservableObject>: View where E.T 
                 }
                 .onPreferenceChange(ViewOffsetKey.self) {
                     onContentOffSetYChange?($0)
-                    print("offset >> \($0)") }
+//                    print("offset >> \($0)")
+                }
                 .coordinateSpace(name: "scroll")
             } else {
                 Text("No Results for \(searchData.query) has been found.")

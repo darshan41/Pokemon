@@ -7,11 +7,23 @@
 
 import UIKit
 
-final class PokeInfoView: UIViewController {
+class PokeInfoView: UIViewController {
+    
+    var pkpPokemon: PKPPokemon?
         
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+    }
+    
+    class func create(with pkpPokemon: PKPPokemon) -> PokeInfoView {
+        let infoView = PokeInfoView.instantiateFromAppStoryBoard(appStoryBoard: .Info)
+        infoView.pkpPokemon = pkpPokemon
+        return infoView
+    }
+    
+    deinit {
+        debugPrint("💥 Deininting \(Self.self)")
     }
 }
 

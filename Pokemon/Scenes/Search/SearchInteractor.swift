@@ -24,6 +24,9 @@ class SplashInteractor  {
                     let pokecallz = try await PokemonServices<Pokemonz>().pokemonAPICalls(handler: PackedParam(for: .pokemon,decoder: self.decoder,parameters: [
                         .limit: "9999"
                     ]))
+                    guard pokecallz.results != nil,!pokecallz.results!.set.isEmpty else {
+                        await self.onError(APIManagerError.pokemonError(error: "No Results found, got empty pokemon from server!"))
+                        return }
                     self.pokecallz = pokecallz
                     try await MainActor.run {
                         try Pokemon.shared.currentCorePokemonDataStack.saveContext()
@@ -31,16 +34,27 @@ class SplashInteractor  {
                         self.presenter?.onSuccess()
                     }
                 } else {
-                    await MainActor.run {
-                        self.presenter?.onSuccess()
+                    let request = Pokemonz.coreFetchRequest(expectedType: Pokemonz.self)
+                    let response = try await Pokemonz.coreFetchAsyncRequest(request, in: Pokemon.shared.currentCorePokemonDataStack.managedContext)
+                    if !response.isEmpty {
+                        self.pokecallz = response.first!
+                        await MainActor.run {
+                            self.presenter?.onSuccess()
+                        }
+                    } else {
+                        Pokemon.shared.refresher.removeLastUpdatedData(for: .service)
+                        getEndPoints()
                     }
                 }
             } catch {
-                await MainActor.run {
-                    self.presenter?.onFailure(with: error.castedToAPIManagerError)
-                }
+                await onError(error.castedToAPIManagerError)
             }
         }
+    }
+    
+    @MainActor
+    private func onError(_ error: ErrorShowable) {
+        self.presenter?.onFailure(with: error.castedToAPIManagerError)
     }
 }
 

@@ -27,7 +27,7 @@ final class RootView: UIViewController,MainNavigable {
 private extension RootView {
     
     func configureView() {
-        let tab = TabBar.createTabBar()
+        let tab = TabBarController.createTabBar()
         ViewEmbedder.embed(parent: self, container: view, child: tab, previous: nil)
         self.mainDelegate = tab
     }

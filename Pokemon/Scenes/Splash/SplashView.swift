@@ -7,6 +7,8 @@
     
 import UIKit
 
+//MVVM
+
 final class SplashView: UIViewController {
     
     @IBOutlet private weak var loader: CustomActivityIndicator!

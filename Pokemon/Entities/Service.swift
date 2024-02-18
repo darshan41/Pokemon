@@ -110,9 +110,6 @@ struct Services: Codable,ValueCheckable {
         case pokeathlonStat = "pokeathlon-stat"
         case versionGroup = "version-group"
     }
-}
-
-extension Services {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: ServiceCodingKey.self)
@@ -165,6 +162,59 @@ extension Services {
         self.moveAilment = try container.decodeIfPresent(String.self, forKey: .moveAilment)
         self.pokeathlonStat = try container.decodeIfPresent(String.self, forKey: .pokeathlonStat)
         self.versionGroup = try container.decodeIfPresent(String.self, forKey: .versionGroup)
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: ServiceCodingKey.self)
+        try container.encode(self.ability, forKey: .ability)
+        try container.encode(self.berry, forKey: .berry)
+        try container.encode(self.berryFirmness, forKey: .berryFirmness)
+        try container.encode(self.berryFlavor, forKey: .berryFlavor)
+        try container.encode(self.characteristic, forKey: .characteristic)
+        try container.encode(self.contestEffect, forKey: .contestEffect)
+        try container.encode(self.contestType, forKey: .contestType)
+        try container.encode(self.eggGroup, forKey: .eggGroup)
+        try container.encode(self.encounterCondition, forKey: .encounterCondition)
+        try container.encode(self.encounterConditionValue, forKey: .encounterConditionValue)
+        try container.encode(self.encounterMethod, forKey: .encounterMethod)
+        try container.encode(self.evolutionChain, forKey: .evolutionChain)
+        try container.encode(self.evolutionTrigger, forKey: .evolutionTrigger)
+        try container.encode(self.gender, forKey: .gender)
+        try container.encode(self.generation, forKey: .generation)
+        try container.encode(self.language, forKey: .language)
+        try container.encode(self.location, forKey: .location)
+        try container.encode(self.machine, forKey: .machine)
+        try container.encode(self.move, forKey: .move)
+        try container.encode(self.pokedex, forKey: .pokedex)
+        try container.encode(self.pokemon, forKey: .pokemon)
+        try container.encode(self.item, forKey: .item)
+        try container.encode(self.service, forKey: .service)
+        try container.encode(self.version, forKey: .version)
+        try container.encode(self.nature, forKey: .nature)
+        try container.encode(self.region, forKey: .region)
+        try container.encode(self.stat, forKey: .stat)
+        try container.encode(self.growthRate, forKey: .growthRate)
+        try container.encode(self.itemAttribute, forKey: .itemAttribute)
+        try container.encode(self.itemCategory, forKey: .itemCategory)
+        try container.encode(self.moveTarget, forKey: .moveTarget)
+        try container.encode(self.itemPocket, forKey: .itemPocket)
+        try container.encode(self.pokemonColor, forKey: .pokemonColor)
+        try container.encode(self.pokemonForm, forKey: .pokemonForm)
+        try container.encode(self.pokemonHabitat, forKey: .pokemonHabitat)
+        try container.encode(self.pokemonShape, forKey: .pokemonShape)
+        try container.encode(self.pokemonSpecies, forKey: .pokemonSpecies)
+        try container.encode(self.type, forKey: .type)
+        try container.encode(self.moveBattleStyle, forKey: .moveBattleStyle)
+        try container.encode(self.itemFlingEffect, forKey: .itemFlingEffect)
+        try container.encode(self.moveDamageClass, forKey: .moveDamageClass)
+        try container.encode(self.moveLearnMethod, forKey: .moveLearnMethod)
+        try container.encode(self.palParkArea, forKey: .palParkArea)
+        try container.encode(self.superContestEffect, forKey: .superContestEffect)
+        try container.encode(self.locationArea, forKey: .locationArea)
+        try container.encode(self.moveCategory, forKey: .moveCategory)
+        try container.encode(self.moveAilment, forKey: .moveAilment)
+        try container.encode(self.pokeathlonStat, forKey: .pokeathlonStat)
+        try container.encode(self.versionGroup, forKey: .versionGroup)
     }
 }
 

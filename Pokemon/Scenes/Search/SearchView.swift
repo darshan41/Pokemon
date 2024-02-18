@@ -10,6 +10,8 @@
 import UIKit
 import SwiftUI
 
+//VIPER
+
 final class SearchView: UIViewController,MainNavigable {
     
     weak var mainDelegate: MainDelegte?

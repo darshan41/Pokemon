@@ -54,23 +54,24 @@ enum TabItem: String,CaseIterable {
     
 }
 
-final class TabBar: UITabBarController {
+final class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
     }
     
-    static func createTabBar() -> TabBar {
-        let tabBar = TabBar()
-        tabBar.setViewControllers(TabItem.createControllers(tabBar), animated: true)
-        return tabBar
+    static func createTabBar() -> TabBarController {
+        let tabBarController = TabBarController()
+        tabBarController.tabBar.tintColor = .pikapikaYellow
+        tabBarController.setViewControllers(TabItem.createControllers(tabBarController), animated: true)
+        return tabBarController
     }
 }
 
-extension TabBar: MainDelegte { }
+extension TabBarController: MainDelegte { }
 
-extension TabBar {
+extension TabBarController {
     
     func configureView() {
         

@@ -8,15 +8,17 @@
 import UIKit
 import CoreData
 
-enum CoreDataModel: String,CaseIterable {
+enum CoreDataModel: String, CaseIterable {
     case pokemon = "Pokemon"
 }
 
+/// Protocol defining the requirements for managing the CoreData stack
 protocol CoreDataStackManagible: AnyObject {
     
     var managedContext: NSManagedObjectContext { get }
     var newBackgroundContext: NSManagedObjectContext { get }
     
+    /// Saves changes made in the managed context
     func saveContext() throws
     
     var ignoreCoreDataNoChangeError: Bool { get }
@@ -24,6 +26,7 @@ protocol CoreDataStackManagible: AnyObject {
     var shouldDeleteInaccessibleFaults: Bool { get }
 }
 
+/// Class responsible for managing the CoreData stack
 class CoreDataStack {
     
     private let model: CoreDataModel
@@ -67,6 +70,7 @@ extension CoreDataStack: CoreDataStackManagible {
     
     // MARK: - Core Data Saving support
 
+    /// Saves changes made in the managed context. Throws an error if there are no changes to save.
     func saveContext() throws {
         let context = managedContext
         guard context.hasChanges else {
@@ -99,6 +103,7 @@ private extension CoreDataStack {
 
 extension CoreDataStack {
     
+    /// Enum defining possible errors related to CoreData operations
     enum Error: ErrorShowable {
         case noChanges
         case custom(String)
@@ -156,4 +161,3 @@ extension NSManagedObject {
         }
     }
 }
-

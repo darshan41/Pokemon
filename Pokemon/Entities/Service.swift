@@ -218,6 +218,7 @@ struct Services: Codable,ValueCheckable {
     }
 }
 
+/// This extension provides methods to get customised endpoints for different services.
 extension Services {
     
     static func getCustomisedEndPoints(
@@ -230,7 +231,7 @@ extension Services {
         )
     }
     
-#warning("Change this as per your requirement add more values.....")
+    /// Change this as per your requirement add more values.....
     static func getDefaultCustomisedEndPoints(
         for key: ServicesCodingKeys,
         _ replacingIdentifiers: BasicDict? = nil

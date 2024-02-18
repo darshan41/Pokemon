@@ -10,8 +10,11 @@ import Foundation
 import CoreData
 import UIKit
 
+/**
+ Enum representing errors that can occur during decoding configuration.
+ */
 enum DecoderConfigurationError: ErrorShowable {
-  case missingManagedObjectContext
+    case missingManagedObjectContext
     
     var showableDescription: String {
         switch self {
@@ -21,13 +24,22 @@ enum DecoderConfigurationError: ErrorShowable {
     }
 }
 
+/**
+ The core data class representing a Pokemon entity.
+ */
 @objc(PKPPokemon)
-public final class PKPPokemon: NSManagedObject,Codable {
+public final class PKPPokemon: NSManagedObject, Codable {
     
     enum CodingKeys: CodingKey {
         case color, id, name, singlePhotoURL, url
     }
     
+    /**
+     Initializes a new Pokemon entity from the given decoder.
+     
+     - Parameter decoder: The decoder to use for decoding the entity.
+     - Throws: An error of type `DecoderConfigurationError` if the managed object context is missing.
+     */
     convenience public init(from decoder: Decoder) throws {
         guard let context = decoder.userInfo[CodingUserInfoKey.managedObjectContext] as? NSManagedObjectContext else {
             throw DecoderConfigurationError.missingManagedObjectContext
@@ -36,7 +48,7 @@ public final class PKPPokemon: NSManagedObject,Codable {
         assert(Pokemon.shared.currentCorePokemonDataStack.managedContext == Pokemon.shared.viewContext)
         self.init(context: context)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        if let hexColorCode = try? container.decodeIfPresent(String.self, forKey: .color),let color = UIColor.init(hex: hexColorCode)  {
+        if let hexColorCode = try? container.decodeIfPresent(String.self, forKey: .color), let color = UIColor(hex: hexColorCode) {
             self.color = color
         } else {
             self.color = nil
@@ -52,13 +64,19 @@ public final class PKPPokemon: NSManagedObject,Codable {
         self.singlePhotoURL = try container.decodeIfPresent(String.self, forKey: .singlePhotoURL)
     }
     
+    /**
+     Encodes the Pokemon entity using the given encoder.
+     
+     - Parameter encoder: The encoder to use for encoding the entity.
+     - Throws: An error if the encoding process fails.
+     */
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encodeIfPresent(self.id, forKey: .id)
         try container.encode(self.name, forKey: .name)
         try container.encodeIfPresent(self.singlePhotoURL, forKey: .singlePhotoURL)
         try container.encodeIfPresent(self.url, forKey: .url)
-        if let color = self.color,let hexColorCode = (color as? UIColor)?.toHexString() {
+        if let color = self.color, let hexColorCode = (color as? UIColor)?.toHexString() {
             try container.encodeIfPresent(hexColorCode, forKey: .color)
         }
     }
@@ -66,6 +84,11 @@ public final class PKPPokemon: NSManagedObject,Codable {
 
 extension PKPPokemon {
     
+    /**
+     Returns the preferred image URL string for the Pokemon entity.
+     
+     - Returns: The preferred image URL string.
+     */
     var preferredImageURLString: String? {
         guard let id else { return nil }
         return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/\(id).svg"
@@ -74,10 +97,15 @@ extension PKPPokemon {
 
 extension String? {
     
+    /**
+     Extracts the Pokemon ID from the URL string.
+     
+     - Returns: The extracted Pokemon ID.
+     */
     var extractedPokemonID: String? {
         guard let url = self.asURL else { return nil }
         let pathComponents = url.pathComponents
-        guard let lastComponent = pathComponents.last, pathComponents.count >= 2,let intId = Int(lastComponent) else { return nil }
+        guard let lastComponent = pathComponents.last, pathComponents.count >= 2, let intId = Int(lastComponent) else { return nil }
         return String(intId)
     }
 }

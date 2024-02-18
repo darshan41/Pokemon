@@ -9,6 +9,7 @@ import Foundation
 import PokemonAPI
 import CoreData
 
+/// Manages the Pokemon actor responsible for handling Pokemon data and CoreData operations.
 @globalActor 
 struct GlobaSharedResource {
     static let shared: Pokemon = .shared
@@ -32,6 +33,7 @@ actor Pokemon {
 }
 
 
+/// Manages the refreshing of CoreData for different services.
 class CoreDataRefresher {
     
     private let defaults: UserDefaults = .standard
@@ -40,6 +42,9 @@ class CoreDataRefresher {
         return "CoreDataRefresher." + service.rawValue
     }
     
+    /// Checks if CoreData needs to be updated for a specific service based on the last update date.
+    /// - Parameter service: The service for which CoreData update needs to be checked.
+    /// - Returns: A boolean value indicating whether CoreData needs to be updated.
     func shouldUpdateCoreData(for service: ServicesCodingKeys) -> Bool {
         guard let lastUpdatedDate = defaults.value(forKey: key(for: service)) as? Date else {
             return true
@@ -49,10 +54,14 @@ class CoreDataRefresher {
         return timeSinceLastUpdate >= twoDaysInSeconds
     }
     
+    /// Sets the last updated date for a specific service in UserDefaults.
+    /// - Parameter service: The service for which the last updated date needs to be set.
     func setLastUpdatedData(for service: ServicesCodingKeys) {
         defaults.setValue(Date(), forKey: key(for: service))
     }
     
+    /// Removes the last updated date for a specific service from UserDefaults.
+    /// - Parameter service: The service for which the last updated date needs to be removed.
     func removeLastUpdatedData(for service: ServicesCodingKeys) {
         defaults.setValue(nil, forKey: key(for: service))
     }

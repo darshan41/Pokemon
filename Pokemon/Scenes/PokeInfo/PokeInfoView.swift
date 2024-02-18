@@ -6,14 +6,14 @@
 //
 
 import UIKit
-import SwiftUI
+import SDWebImage
 
 class PokeInfoView: UIViewController {
     
     @IBOutlet private weak var loader: CustomActivityIndicator!
     @IBOutlet private weak var ringedCircularView: RingedCircleView!
     @IBOutlet private weak var pokemonName: UILabel!
-    @IBOutlet private weak var pokemonImage: UIImageView!
+    @IBOutlet private weak var pokemonImage: PokemonImageView!
     @IBOutlet private weak var pokemonSmallDescription: UILabel!
     
     private var pokeInfoModel: PokeInfoModel!
@@ -55,34 +55,38 @@ class PokeInfoView: UIViewController {
 
 private extension PokeInfoView {
     
-    func configureView() {
-        let pokeInfoModel = PokeInfoModel(pkpPokemon: pkpPokemon)
-        self.title = pkpPokemon?.hashedID
-        pokemonName.textColor = .oppositeAccent
-        pokemonSmallDescription.textColor = .oppositeAccent
-        self.pokeInfoModel = pokeInfoModel
-        pokeInfoModel.onStateChange = { [weak self] state in
-            guard let self else { return }
-            switch state {
-            case .loading:
-                self.showLoader = true
-            case .success:
-                self.onSuccessOfGettingInfo()
-            case .failure(let error):
-                showAlert(title: error, positiveTapWithTitle: ("Reload", { [weak self] in
-                    guard let self else { return }
-                    self.pokeInfoModel.getInformation()
-                }), negativeTapWithTitle: ("Go Back", { [weak self] in
-                    guard let self else { return }
-                    self.navigationController?.popViewController(animated: true)
-                }), positiveButtonStyle: .default, negativeButtonStyle: .default)
-            }
+/// Configures the view by setting up the PokeInfoModel, loading the Pokemon image, setting the title, and handling different states of the PokeInfoModel.
+func configureView() {
+    let pokeInfoModel = PokeInfoModel(pkpPokemon: pkpPokemon)
+    pokemonImage.downloadedsvg(from: pkpPokemon?.preferredImageURLString.asURL, contentMode: .scaleAspectFit)
+    self.title = pkpPokemon?.hashedID
+    pokemonName.textColor = .oppositeAccent
+    pokemonSmallDescription.textColor = .oppositeAccent
+    self.pokeInfoModel = pokeInfoModel
+    pokeInfoModel.onStateChange = { [weak self] state in
+        guard let self else { return }
+        switch state {
+        case .loading:
+            self.showLoader = true
+        case .success:
+            self.onSuccessOfGettingInfo()
+        case .failure(let error):
+            showAlert(title: error, positiveTapWithTitle: ("Reload", { [weak self] in
+                guard let self else { return }
+                self.pokeInfoModel.getInformation()
+            }), negativeTapWithTitle: ("Go Back", { [weak self] in
+                guard let self else { return }
+                self.navigationController?.popViewController(animated: true)
+            }), positiveButtonStyle: .default, negativeButtonStyle: .default)
         }
-        pokeInfoModel.getInformation()
     }
+    pokeInfoModel.getInformation()
+}
     
+    /// Updates the view after successfully retrieving Pokemon information by hiding the loader and setting the Pokemon name.
     func onSuccessOfGettingInfo() {
         self.showLoader = false
         pokemonName.setText(pkpPokemon?.name)
     }
 }
+

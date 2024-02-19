@@ -9,7 +9,7 @@ import Foundation
 
 struct HeldItems: Codable {
     let item: Item
-    let versionDetails: [VersionDetails]
+//    let versionDetails: [VersionDetails]
 }
 
 extension HeldItems {

@@ -24,8 +24,10 @@ protocol SingleParamProtocol {
 
 struct PackedParam  {
     
-    var key: ServicesCodingKeys
     let decoder: PokeDecoder
+    let key: ServicesCodingKeys
+
+    var appendingPath: String?
     var parameters: ParameterDictionary?
     var urlReplacingIdentifiers: ParameterDictionary?
     var headers: BasicDict?

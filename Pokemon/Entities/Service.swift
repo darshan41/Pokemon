@@ -223,10 +223,12 @@ extension Services {
     
     static func getCustomisedEndPoints(
         for key: ServicesCodingKeys,
+        appendingPath: String? = nil,
         _ replacingIdentifiers: BasicDict? = nil
     ) throws -> ServiceInfo? {
         return try Self.getDefaultCustomisedEndPoints(
             for: key,
+            appendingPath: appendingPath,
             replacingIdentifiers
         )
     }
@@ -234,6 +236,7 @@ extension Services {
     /// Change this as per your requirement add more values.....
     static func getDefaultCustomisedEndPoints(
         for key: ServicesCodingKeys,
+        appendingPath: String? = nil,
         _ replacingIdentifiers: BasicDict? = nil
     ) throws -> ServiceInfo? {
         if key == .service {
@@ -243,11 +246,19 @@ extension Services {
         case .pokemon:
             return ServiceInfo(
                 serviceKey: .pokemon,
-                serviceURL: Constants.API.services?.pokemon,
+                serviceURL: Constants.API.services?.pokemon.appendingOther(appendingPath),
                 serviceMethod: .Get
             )
         default:
             return nil
         }
+    }
+}
+
+fileprivate extension String? {
+    
+    func appendingOther<T: StringProtocol>(_ other: T?) -> String? {
+        guard var self,let other else { return self }
+        return self.appending(other)
     }
 }

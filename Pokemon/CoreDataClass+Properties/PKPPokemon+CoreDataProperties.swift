@@ -64,6 +64,7 @@ extension PKPPokemon: Identifiable {
 
 
 extension PKPPokemon: TableObject {
+    
     var text: String? { name }
     var hashedID: String? { id == nil ? nil : "#\(id!)" }
 }

@@ -10,35 +10,41 @@ import Foundation
 /// Represents the PokePedia entity which stores information about a Pokemon.
 class PokePedia: Codable {
     
-    let id: String
+    let id: Int16
     let name: String
     let order: Int16
     let isDefault: Bool
-    
-    let abilities: [Ability]
-    let slot: Int16
-    
-    let baseExperience: Int16
-    let cries: PokemonCry?
-    let forms: [PokemonForm]
     let height: Int16
     let weight: Int16
-    
-    let gameIndices: [GameIndices]?
+    let baseExperience: Int16
+    let abilities: [Ability]
+    let cries: PokemonCry?
+    let forms: [PokemonForm]
     let heldItems: [HeldItems]
-    
-    let locationAreaEncounters: String
-    
-    let moves: [PokemonMove]
-    let types: [PokemonAbilityType]
+//    let moves: [PokemonMove]?
+//    let types: [PokemonAbilityType]
     let species: PokemonSpecie?
-    let stats: [PokemonStat]
+    let sprites: ExtendedPokemonSprite?
+//    let stats: [PokemonStat]
+//    let locationAreaEncounters: String
+    //    let gameIndices: [GameIndices]?
 //    let pastAbilities: [String]
 //    let pastTypes: [String]
 }
 
 
 extension PokePedia {
+    
+    class Sprite: Codable {
+        let backDefault: URL?
+        let backFemale: URL?
+        let backShiny: URL?
+        let backShinyFemale: URL?
+        let frontDefault: URL?
+        let frontFemale: URL?
+        let frontShiny: URL?
+        let frontShinyFemale: URL?
+    }
     
     /// Represents a Pokemon form with name and URL.
     class PokemonForm: Codable {
@@ -48,15 +54,19 @@ extension PokePedia {
     
     /// Represents a Pokemon move with name and URL.
     class PokemonMove: Codable {
-        let name: String
-        let url: String
+        let name: String?
+        let url: String?
+    }
+    
+    struct VersionGroupDetails: Codable {
+        let levelLearnedAt: Int16
     }
     
     /// Represents the Pokemon cry with latest and legacy URLs.
-    class PokemonCry: Codable {
-        let latest: String
+    struct PokemonCry: Codable {
+        let latest: String?
         /// Ogg URL
-        let legacy: String
+        let legacy: String?
     }
     
     /// Represents game indices with game index and version.

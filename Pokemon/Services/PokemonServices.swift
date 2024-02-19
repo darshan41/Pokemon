@@ -29,10 +29,15 @@ extension PokemonServices  {
     func pokemonAPICalls(
         for service: ServicesCodingKeys,
         decoder: PokeDecoder,
-        _ urlReplacingIdentifiers: BasicDict? = nil,
-        _ parameters: BasicDict? = nil
+        appendingPath: String? = nil,
+        urlReplacingIdentifiers: BasicDict? = nil,
+        parameters: BasicDict? = nil
     ) async throws -> SomeModel {
-        guard let serviceInfo = try Services.getCustomisedEndPoints(for: service, urlReplacingIdentifiers) else {
+        guard let serviceInfo = try Services.getCustomisedEndPoints(
+            for: service,
+            appendingPath: appendingPath,
+            urlReplacingIdentifiers
+        ) else {
             throw APIManagerError.invalidServiceInformation(key: service)
         }
         let parameters = serviceInfo.addDefaultParamsWhereverNeccesary(with: parameters)
@@ -62,12 +67,7 @@ extension PokemonServices  {
     ) async throws -> SomeModel {
         self.urlSession = paramHandler.session
         self.supplementartURLRequest = paramHandler.supplementartURLRequest
-        return try await self.pokemonAPICalls(
-            for: paramHandler.key,
-            decoder: paramHandler.decoder,
-            paramHandler.urlReplacingIdentifiers?.toParamDictionary,
-            paramHandler.parameters?.toParamDictionary
-        )
+        return try await self.pokemonAPICalls(for: paramHandler.key, decoder: paramHandler.decoder, appendingPath: paramHandler.appendingPath, urlReplacingIdentifiers: paramHandler.urlReplacingIdentifiers?.toParamDictionary, parameters: paramHandler.parameters?.toParamDictionary)
     }
 }
 

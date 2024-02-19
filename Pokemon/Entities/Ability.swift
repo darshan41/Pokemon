@@ -11,13 +11,13 @@ class Ability: Codable {
     
     let ability: Info
     let isHidden: Bool
-    let slot: Bool
+    let slot: Int16
     
 }
 
 extension Ability {
     
-    class Info: Codable {
+    struct Info: Codable {
         let name: String
         let url: String
     }

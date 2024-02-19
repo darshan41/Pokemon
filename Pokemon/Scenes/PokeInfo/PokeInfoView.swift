@@ -58,7 +58,7 @@ private extension PokeInfoView {
 /// Configures the view by setting up the PokeInfoModel, loading the Pokemon image, setting the title, and handling different states of the PokeInfoModel.
 func configureView() {
     let pokeInfoModel = PokeInfoModel(pkpPokemon: pkpPokemon)
-    pokemonImage.downloadedsvg(from: pkpPokemon?.preferredImageURLString.asURL, contentMode: .scaleAspectFit)
+//    pokemonImage.downloadedsvg(from: pkpPokemon?.preferredImageURLString.asURL, contentMode: .scaleAspectFit)
     self.title = pkpPokemon?.hashedID
     pokemonName.textColor = .oppositeAccent
     pokemonSmallDescription.textColor = .oppositeAccent
@@ -86,7 +86,13 @@ func configureView() {
     /// Updates the view after successfully retrieving Pokemon information by hiding the loader and setting the Pokemon name.
     func onSuccessOfGettingInfo() {
         self.showLoader = false
-        pokemonName.setText(pkpPokemon?.name)
+        guard let pokePedia = pokeInfoModel.pokePedia else { return }
+        if self.title == nil {
+            self.title = String(pokePedia.id).hashedString
+        }
+        self.pokemonImage.loadFrom(from: pokePedia.sprites?.frontLoadPreferSVGImage?.url) { [weak self] in
+            self?.pokemonImage.loadFrom(from: pokePedia.sprites?.frontLoadImage?.url)
+        }
     }
 }
 

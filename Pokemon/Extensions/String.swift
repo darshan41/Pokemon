@@ -19,6 +19,8 @@ extension String {
 
 extension String? {
     
+    var optHashedString: String? { self == nil ? nil : self!.hashedString }
+    
     var isValidString: Bool { (self != nil) && self!.isValid  }
     
     var asURL: URL? {
@@ -27,7 +29,8 @@ extension String? {
 }
 
 extension String {
-   
+    
+    var hashedString: String { "#\(self)" }
     var firstServiceParam: String { "?"+self+"=" }
     var serviceParam: String { "&"+self+"=" }
     var identifierParam: String { "{"+self+"}" }
@@ -104,6 +107,10 @@ extension String {
         let paramsRequired = Set(params.filter({ !self.contains($0.rawValue + "=") }).map({ $0.rawValue }))
         guard paramsRequired.isEmpty else { return .getParametersAreNotSatisfied(parametersRequired: paramsRequired) }
         return nil
+    }
+    
+    func appending(_ pathString: String) -> String {
+        return self + "/\(pathString)"
     }
 }
 

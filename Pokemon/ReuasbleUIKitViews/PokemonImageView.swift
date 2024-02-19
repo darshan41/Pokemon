@@ -11,13 +11,39 @@ import SVGKit
 
 public class PokemonImageView: UIImageView {
     
+    private var defaultImage: UIImage?
+    
+}
+
+extension PokemonImageView {
+    
+    func loadFrom(from url: URL?,onError: (() -> Void)? = nil) {
+        guard let url else {
+            self.image = defaultImage
+            return
+        }
+        switch ExtendedPokemonSprite.ImageFormat(anyVal: url.pathExtension) {
+        case .png:
+            self.sd_internalSetImage(with: url, placeholderImage: self.defaultImage, context: [:], setImageBlock: nil, progress: nil)
+        case .svg:
+            downloadedsvg(from: url,onError: onError)
+        default:
+            self.image = defaultImage
+        }
+    }
 }
 
 extension UIImageView {
     
-    func downloadedsvg(from url: URL?, contentMode mode: UIView.ContentMode = .scaleAspectFit) {
+    func downloadedsvg(
+        from url: URL?,
+        contentMode mode: UIView.ContentMode = .scaleAspectFit,
+        onError: (() -> Void)? = nil
+    ) {
         contentMode = mode
-        guard let url else { return }
+        guard let url else {
+            onError?()
+            return }
         URLSession.shared.dataTask(with: url) { data, response, error in
             print(url.absoluteString)
             guard
@@ -26,7 +52,8 @@ extension UIImageView {
                 let data = data, error == nil,
                 let receivedicon: SVGKImage = SVGKImage(data: data),
                 let image = receivedicon.uiImage
-            else { 
+            else {
+                onError?()
                 return
             }
             DispatchQueue.main.async() {

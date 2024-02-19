@@ -84,12 +84,26 @@
 		BE9B84D42B77E73E00F36097 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B84D32B77E73E00F36097 /* ErrorView.swift */; };
 		BECB5F472B83D4D60069CAAA /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB5F462B83D4D60069CAAA /* Sprite.swift */; };
 		BECB5F492B83D6A40069CAAA /* PokemonVersions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB5F482B83D6A40069CAAA /* PokemonVersions.swift */; };
+		BECB5F592B83ECC20069CAAA /* PokeCryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB5F582B83ECC20069CAAA /* PokeCryManager.swift */; };
 		BEDD3FC22B77F83900B1777A /* ErrorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDD3FC12B77F83900B1777A /* ErrorButton.swift */; };
 		BEDD3FC42B77FF2700B1777A /* GifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDD3FC32B77FF2700B1777A /* GifView.swift */; };
 		BEDD3FC62B77FF5300B1777A /* pokeball.gif in Resources */ = {isa = PBXBuildFile; fileRef = BEDD3FC52B77FF5300B1777A /* pokeball.gif */; };
 		BEDD3FC82B78050D00B1777A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDD3FC72B78050D00B1777A /* Color.swift */; };
 		DE6B0C6C3232E0BFDDC1C8E7 /* Pods_Pokemon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7FEDD4376C17E694C7AD5E05 /* Pods_Pokemon.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BECB5F542B83EBF30069CAAA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7FEDD4376C17E694C7AD5E05 /* Pods_Pokemon.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Pokemon.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +182,7 @@
 		BE9B84D32B77E73E00F36097 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		BECB5F462B83D4D60069CAAA /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		BECB5F482B83D6A40069CAAA /* PokemonVersions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonVersions.swift; sourceTree = "<group>"; };
+		BECB5F582B83ECC20069CAAA /* PokeCryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeCryManager.swift; sourceTree = "<group>"; };
 		BEDD3FC12B77F83900B1777A /* ErrorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorButton.swift; sourceTree = "<group>"; };
 		BEDD3FC32B77FF2700B1777A /* GifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifView.swift; sourceTree = "<group>"; };
 		BEDD3FC52B77FF5300B1777A /* pokeball.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = pokeball.gif; sourceTree = "<group>"; };
@@ -226,6 +241,7 @@
 			children = (
 				BE70532F2B78C82E000E065D /* CoreDataStack.swift */,
 				BE7053712B793322000E065D /* UserDefaultValues.swift */,
+				BECB5F582B83ECC20069CAAA /* PokeCryManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -542,6 +558,7 @@
 				BE99D2812B752D9100F897F0 /* Frameworks */,
 				BE99D2822B752D9100F897F0 /* Resources */,
 				3AE8D1C3C6C0158DE5B0644B /* [CP] Embed Pods Frameworks */,
+				BECB5F542B83EBF30069CAAA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -712,6 +729,7 @@
 				BE99D2882B752D9100F897F0 /* AppDelegate.swift in Sources */,
 				BE734AE12B8221BD00DB9EE9 /* SplashModel.swift in Sources */,
 				BE9B84BF2B77B15900F36097 /* PokePedia.swift in Sources */,
+				BECB5F592B83ECC20069CAAA /* PokeCryManager.swift in Sources */,
 				BE9B84D42B77E73E00F36097 /* ErrorView.swift in Sources */,
 				BE9B84CB2B77BBDE00F36097 /* Species.swift in Sources */,
 				BE99D2BD2B7535B100F897F0 /* SearchRouter.swift in Sources */,
@@ -884,6 +902,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T2K2L3R6A4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pokemon/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -913,6 +935,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T2K2L3R6A4;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Pokemon/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

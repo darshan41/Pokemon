@@ -17,6 +17,9 @@ class PokeInfoView: UIViewController {
     @IBOutlet private weak var pokemonSmallDescription: UILabel!
     
     private var pokeInfoModel: PokeInfoModel!
+    
+    private lazy var pokemonCry: PokeCryManager = { PokeCryManager() }()
+    
     private weak var pkpPokemon: PKPPokemon?
     
     private var showLoader: Bool = false {
@@ -90,6 +93,7 @@ func configureView() {
         if self.title == nil {
             self.title = String(pokePedia.id).hashedString
         }
+        pokemonCry.play(with: pokePedia.cries?.latest.asURL)
         self.pokemonImage.loadFrom(from: pokePedia.sprites?.frontLoadPreferSVGImage?.url) { [weak self] in
             self?.pokemonImage.loadFrom(from: pokePedia.sprites?.frontLoadImage?.url)
         }

@@ -13,8 +13,6 @@ extension String {
     }
 }
 
-
-
 // MARK: String
 
 extension String? {

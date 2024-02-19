@@ -7,5 +7,6 @@ target 'Pokemon' do
 
   # Pods for Pokemon
 pod 'SDWebImage'
+pod 'MobileVLCKit'
 
 end

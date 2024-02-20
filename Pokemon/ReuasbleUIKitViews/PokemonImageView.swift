@@ -11,15 +11,32 @@ import SVGKit
 
 public class PokemonImageView: UIImageView {
     
-    private var defaultImage: UIImage?
+    private var defaultImage: UIImage? = .default
     
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setup()
+    }
+}
+
+// MARK: Helper func's
+
+private extension PokemonImageView {
+    
+    func setup() {
+        image = defaultImage
+    }
 }
 
 extension PokemonImageView {
     
     func loadFrom(from url: URL?,onError: (() -> Void)? = nil) {
         guard let url else {
-            self.image = defaultImage
             return
         }
         switch ExtendedPokemonSprite.ImageFormat(anyVal: url.pathExtension) {

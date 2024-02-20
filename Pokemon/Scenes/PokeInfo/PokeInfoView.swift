@@ -42,7 +42,9 @@ class PokeInfoView: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.isNavigationBarHidden = true
+        if self.isMovingFromParent {
+            self.navigationController?.isNavigationBarHidden = true
+        }
     }
     
     class func create(with pkpPokemon: PKPPokemon) -> PokeInfoView {
@@ -69,33 +71,35 @@ class PokeInfoView: UIViewController {
 private extension PokeInfoView {
     
 /// Configures the view by setting up the PokeInfoModel, loading the Pokemon image, setting the title, and handling different states of the PokeInfoModel.
-func configureView() {
-    let pokeInfoModel = PokeInfoModel(pkpPokemon: pkpPokemon)
-//    pokemonImage.downloadedsvg(from: pkpPokemon?.preferredImageURLString.asURL, contentMode: .scaleAspectFit)
-    self.title = pkpPokemon?.hashedID
-    pokemonName.textColor = .oppositeAccent
-    pokemonName.setText(pkpPokemon?.name)
-    pokemonSmallDescription.textColor = .oppositeAccent
-    self.pokeInfoModel = pokeInfoModel
-    pokeInfoModel.onStateChange = { [weak self] state in
-        guard let self else { return }
-        switch state {
-        case .loading:
-            self.showLoader = true
-        case .success:
-            self.onSuccessOfGettingInfo()
-        case .failure(let error):
-            showAlert(title: error, positiveTapWithTitle: ("Reload", { [weak self] in
-                guard let self else { return }
-                self.pokeInfoModel.getInformation()
-            }), negativeTapWithTitle: ("Go Back", { [weak self] in
-                guard let self else { return }
-                self.navigationController?.popViewController(animated: true)
-            }), positiveButtonStyle: .default, negativeButtonStyle: .default)
+    func configureView() {
+        let customBackButton = UIBarButtonItem(image: UIImage(.left)?.withConfiguration(.backConfig), style: .plain, target: self, action: #selector(backAction(sender:)))
+        customBackButton.tintColor = .oppositeAccent
+        navigationItem.leftBarButtonItem = customBackButton
+        let pokeInfoModel = PokeInfoModel(pkpPokemon: pkpPokemon)
+        self.title = pkpPokemon?.hashedID
+        pokemonName.textColor = .oppositeAccent
+        pokemonName.setText(pkpPokemon?.name)
+        pokemonSmallDescription.textColor = .accent
+        self.pokeInfoModel = pokeInfoModel
+        pokeInfoModel.onStateChange = { [weak self] state in
+            guard let self else { return }
+            switch state {
+            case .loading:
+                self.showLoader = true
+            case .success:
+                self.onSuccessOfGettingInfo()
+            case .failure(let error):
+                showAlert(title: error, positiveTapWithTitle: ("Reload", { [weak self] in
+                    guard let self else { return }
+                    self.pokeInfoModel.getInformation()
+                }), negativeTapWithTitle: ("Go Back", { [weak self] in
+                    guard let self else { return }
+                    self.navigationController?.popViewController(animated: true)
+                }), positiveButtonStyle: .default, negativeButtonStyle: .default)
+            }
         }
+        pokeInfoModel.getInformation()
     }
-    pokeInfoModel.getInformation()
-}
     
     /// Updates the view after successfully retrieving Pokemon information by hiding the loader and setting the Pokemon name.
     func onSuccessOfGettingInfo() {
@@ -109,6 +113,11 @@ func configureView() {
         self.pokemonImage.loadFrom(from: pokePedia.sprites?.frontLoadPreferSVGImage?.url) { [weak self] in
             self?.pokemonImage.loadFrom(from: pokePedia.sprites?.frontLoadImage?.url)
         }
+    }
+    
+    @objc func backAction(sender: UIBarButtonItem) {
+        // custom actions here
+        navigationController?.popViewController(animated: true)
     }
 }
 

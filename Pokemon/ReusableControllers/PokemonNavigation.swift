@@ -31,9 +31,16 @@ class PokemonNavigation: UINavigationController {
     }
 }
 
+extension PokemonNavigation: UIGestureRecognizerDelegate {
+    
+    func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+        self.interactivePopGestureRecognizer?.isEnabled = self.viewControllers.count > 1
+    }
+}
+
 extension PokemonNavigation {
     
     func configureView() {
-        
+        interactivePopGestureRecognizer?.delegate = self
     }
 }

@@ -86,3 +86,11 @@ enum ServiceMethod: String,Codable {
         }
     }
 }
+
+
+enum SystemImage: String {
+    case left = "chevron.left"
+    case right = "chevron.right"
+    case down = "chevron.down"
+    case up = "chevron.up"
+}

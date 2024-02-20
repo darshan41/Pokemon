@@ -250,6 +250,10 @@ extension NSObject {
 
 extension UIImage.Configuration {
     
+    static var backConfig: UIImage.SymbolConfiguration {
+        .init(font: .monospacedSystemFont(ofSize: 16, weight: .medium))
+    }
+    
 }
 
 func delay(_ delayTime: DispatchTime? = nil,_ handler: @escaping (() -> Void)) {

@@ -20,6 +20,7 @@ class CustomActivityIndicator: UIActivityIndicatorView {
     }
     
     func commonInit() {
+        self.style = .large
         self.color = UIColor.pikapikaYellow
         self.hidesWhenStopped = true
     }

@@ -6,8 +6,17 @@
 //
 
 import UIKit
+import SwiftUI
 
 class OGGButton: UIButton {
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+       if #available(iOS 13.0, *) {
+           if (traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection)) {
+               layer.borderColor = Color.oppositeSchemeColor.toUIColor.cgColor
+           }
+       }
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,7 +34,7 @@ class OGGButton: UIButton {
         layer.cornerRadius = 10.0
         layer.borderWidth = 1.0
         layer.borderColor = UIColor.oppositeAccent.cgColor
-        setTitleColor(UIColor.accent, for: .normal)
+        setTitleColor(UIColor.oppositeAccent, for: .normal)
         backgroundColor = UIColor.clear
     }
 

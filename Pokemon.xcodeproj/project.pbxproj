@@ -82,6 +82,9 @@
 		BE9B84D02B77DD4C00F36097 /* PokeBall.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B84CF2B77DD4C00F36097 /* PokeBall.swift */; };
 		BE9B84D22B77DF5A00F36097 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B84D12B77DF5A00F36097 /* View.swift */; };
 		BE9B84D42B77E73E00F36097 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE9B84D32B77E73E00F36097 /* ErrorView.swift */; };
+		BEA0F1B72B851A2F0061A65E /* AnimatedPokeballView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0F1B62B851A2F0061A65E /* AnimatedPokeballView.swift */; };
+		BEA0F1B92B851A530061A65E /* UIBezierPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0F1B82B851A530061A65E /* UIBezierPath.swift */; };
+		BEA0F1BB2B851FD40061A65E /* OGGButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA0F1BA2B851FD40061A65E /* OGGButton.swift */; };
 		BECB5F472B83D4D60069CAAA /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB5F462B83D4D60069CAAA /* Sprite.swift */; };
 		BECB5F492B83D6A40069CAAA /* PokemonVersions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB5F482B83D6A40069CAAA /* PokemonVersions.swift */; };
 		BECB5F592B83ECC20069CAAA /* PokeCryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB5F582B83ECC20069CAAA /* PokeCryManager.swift */; };
@@ -180,6 +183,9 @@
 		BE9B84CF2B77DD4C00F36097 /* PokeBall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeBall.swift; sourceTree = "<group>"; };
 		BE9B84D12B77DF5A00F36097 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		BE9B84D32B77E73E00F36097 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		BEA0F1B62B851A2F0061A65E /* AnimatedPokeballView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedPokeballView.swift; sourceTree = "<group>"; };
+		BEA0F1B82B851A530061A65E /* UIBezierPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBezierPath.swift; sourceTree = "<group>"; };
+		BEA0F1BA2B851FD40061A65E /* OGGButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OGGButton.swift; sourceTree = "<group>"; };
 		BECB5F462B83D4D60069CAAA /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		BECB5F482B83D6A40069CAAA /* PokemonVersions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonVersions.swift; sourceTree = "<group>"; };
 		BECB5F582B83ECC20069CAAA /* PokeCryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeCryManager.swift; sourceTree = "<group>"; };
@@ -232,6 +238,8 @@
 				BE7053192B78B165000E065D /* Giffy.swift */,
 				BE734AF52B825C7D00DB9EE9 /* RingedCircleView.swift */,
 				BE734AFE2B82695E00DB9EE9 /* PokemonImageView.swift */,
+				BEA0F1B62B851A2F0061A65E /* AnimatedPokeballView.swift */,
+				BEA0F1BA2B851FD40061A65E /* OGGButton.swift */,
 			);
 			path = ReuasbleUIKitViews;
 			sourceTree = "<group>";
@@ -464,6 +472,7 @@
 				BEDD3FC72B78050D00B1777A /* Color.swift */,
 				BE70532B2B78C7AE000E065D /* Notification.swift */,
 				BE734AF72B82639300DB9EE9 /* UILabel.swift */,
+				BEA0F1B82B851A530061A65E /* UIBezierPath.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -680,6 +689,7 @@
 				BE7053642B78EA91000E065D /* PKPPokemon+CoreDataClass.swift in Sources */,
 				BE9B84C12B77B76300F36097 /* jsonDecoder.swift in Sources */,
 				BE9B84D02B77DD4C00F36097 /* PokeBall.swift in Sources */,
+				BEA0F1B72B851A2F0061A65E /* AnimatedPokeballView.swift in Sources */,
 				BE9B84BB2B77A9FE00F36097 /* CustomSearchBar.swift in Sources */,
 				BECB5F472B83D4D60069CAAA /* Sprite.swift in Sources */,
 				BE9B84A42B778DF200F36097 /* APIManagerExtension.swift in Sources */,
@@ -703,11 +713,13 @@
 				BE7053722B793322000E065D /* UserDefaultValues.swift in Sources */,
 				BE9B84A02B778DC600F36097 /* NSURLErrors.swift in Sources */,
 				BE99D2B52B75349D00F897F0 /* UIViewController.swift in Sources */,
+				BEA0F1BB2B851FD40061A65E /* OGGButton.swift in Sources */,
 				BE734AF42B82598A00DB9EE9 /* PokeInfoModel.swift in Sources */,
 				BE9B84AE2B778F1500F36097 /* Operators.swift in Sources */,
 				BECB5F492B83D6A40069CAAA /* PokemonVersions.swift in Sources */,
 				BE99D2A92B7532E800F897F0 /* Services.swift in Sources */,
 				BE9B84A22B778DD600F36097 /* ServiceInfo.swift in Sources */,
+				BEA0F1B92B851A530061A65E /* UIBezierPath.swift in Sources */,
 				BE99D2CA2B75512B00F897F0 /* PaginatedResultsView.swift in Sources */,
 				BE7053752B796020000E065D /* TabBarController.swift in Sources */,
 				BE734AF62B825C7D00DB9EE9 /* RingedCircleView.swift in Sources */,

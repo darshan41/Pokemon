@@ -15,6 +15,8 @@ class PokeInfoView: UIViewController {
     @IBOutlet private weak var pokemonName: UILabel!
     @IBOutlet private weak var pokemonImage: PokemonImageView!
     @IBOutlet private weak var pokemonSmallDescription: UILabel!
+    @IBOutlet private weak var latestPokemonCryBtn: OGGButton!
+    @IBOutlet private weak var legacyPokemonCryBtn: OGGButton!
     
     private var pokeInfoModel: PokeInfoModel!
     
@@ -49,6 +51,14 @@ class PokeInfoView: UIViewController {
         return infoView
     }
     
+    @IBAction private func onTapCry(_ sender: OGGButton) {
+        if sender === latestPokemonCryBtn {
+            pokemonCry.play(with: pokeInfoModel.pokePedia?.cries?.latest.asURL)
+        } else {
+            pokemonCry.play(with: pokeInfoModel.pokePedia?.cries?.legacy.asURL)
+        }
+    }
+    
     deinit {
         debugPrint("💥 Deininting \(Self.self)")
     }
@@ -64,6 +74,7 @@ func configureView() {
 //    pokemonImage.downloadedsvg(from: pkpPokemon?.preferredImageURLString.asURL, contentMode: .scaleAspectFit)
     self.title = pkpPokemon?.hashedID
     pokemonName.textColor = .oppositeAccent
+    pokemonName.setText(pkpPokemon?.name)
     pokemonSmallDescription.textColor = .oppositeAccent
     self.pokeInfoModel = pokeInfoModel
     pokeInfoModel.onStateChange = { [weak self] state in
@@ -93,7 +104,8 @@ func configureView() {
         if self.title == nil {
             self.title = String(pokePedia.id).hashedString
         }
-        pokemonCry.play(with: pokePedia.cries?.latest.asURL)
+        latestPokemonCryBtn.isEnabled = pokePedia.cries?.latest.asURL != nil
+        legacyPokemonCryBtn.isEnabled = pokePedia.cries?.legacy.asURL != nil
         self.pokemonImage.loadFrom(from: pokePedia.sprites?.frontLoadPreferSVGImage?.url) { [weak self] in
             self?.pokemonImage.loadFrom(from: pokePedia.sprites?.frontLoadImage?.url)
         }

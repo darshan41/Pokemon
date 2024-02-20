@@ -58,8 +58,8 @@
                                             <constraint firstAttribute="width" secondItem="TXO-fG-u0w" secondAttribute="height" multiplier="1:1" id="w9G-HL-AWG"/>
                                         </constraints>
                                     </view>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H8E-M3-04o">
-                                        <rect key="frame" x="169.66666666666666" y="406" width="53.666666666666657" height="55.333333333333314"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H8E-M3-04o">
+                                        <rect key="frame" x="169.66666666666666" y="446" width="53.666666666666657" height="26.333333333333314"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Eh4-8T-I2T">
                                                 <rect key="frame" x="0.0" y="0.0" width="53.666666666666664" height="26.333333333333332"/>
@@ -70,8 +70,8 @@
                                                 <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="shadowColor" name="AccentColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHF-e3-W2h">
-                                                <rect key="frame" x="0.0" y="36.333333333333314" width="53.666666666666664" height="19"/>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UHF-e3-W2h">
+                                                <rect key="frame" x="0.0" y="0.0" width="53.666666666666664" height="0.0"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
@@ -83,16 +83,54 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Eg1-JR-KAP">
+                                        <rect key="frame" x="74.666666666666686" y="502.33333333333337" width="244" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jS9-ZO-uKF" customClass="OGGButton" customModule="Pokemon" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="106" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Latest cry">
+                                                    <color key="titleColor" name="AccentColor"/>
+                                                    <color key="titleShadowColor" name="OppositeAccentColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onTapCry:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Vhe-Q7-7vG"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ut-hy-606" customClass="OGGButton" customModule="Pokemon" customModuleProvider="target">
+                                                <rect key="frame" x="126" y="0.0" width="118" height="40"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="contentEdgeInsets" minX="8" minY="8" maxX="8" maxY="8"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="Legacy Cry">
+                                                    <color key="titleColor" name="AccentColor"/>
+                                                    <color key="titleShadowColor" name="OppositeAccentColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onTapCry:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="MSk-n0-pPx"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="3fT-NU-8sX" firstAttribute="top" secondItem="AQm-qv-vn6" secondAttribute="top" id="2Fk-T1-9Od"/>
                                     <constraint firstAttribute="trailing" secondItem="3fT-NU-8sX" secondAttribute="trailing" constant="20" id="5Ia-K1-x8k"/>
-                                    <constraint firstItem="3fT-NU-8sX" firstAttribute="bottom" secondItem="H8E-M3-04o" secondAttribute="top" constant="20" id="Xjf-Ml-jhb"/>
-                                    <constraint firstAttribute="bottom" secondItem="H8E-M3-04o" secondAttribute="bottom" constant="30" id="Y4h-5E-TZJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="Eg1-JR-KAP" secondAttribute="bottom" constant="30" id="CYB-Mh-hSF"/>
+                                    <constraint firstItem="3fT-NU-8sX" firstAttribute="bottom" secondItem="H8E-M3-04o" secondAttribute="top" constant="-20" id="Xjf-Ml-jhb"/>
+                                    <constraint firstItem="Eg1-JR-KAP" firstAttribute="centerX" secondItem="H8E-M3-04o" secondAttribute="centerX" id="nyk-dU-0Ha"/>
                                     <constraint firstItem="3fT-NU-8sX" firstAttribute="leading" secondItem="AQm-qv-vn6" secondAttribute="leading" constant="20" id="rTz-Y4-ppE"/>
                                     <constraint firstItem="H8E-M3-04o" firstAttribute="centerX" secondItem="3fT-NU-8sX" secondAttribute="centerX" id="t4s-rM-u3Y"/>
+                                    <constraint firstItem="Eg1-JR-KAP" firstAttribute="top" secondItem="H8E-M3-04o" secondAttribute="bottom" constant="30" id="toS-5p-xQX"/>
                                     <constraint firstItem="H8E-M3-04o" firstAttribute="width" secondItem="3fT-NU-8sX" secondAttribute="width" multiplier="0.15203" id="u2I-bd-1NZ"/>
                                 </constraints>
                             </scrollView>
@@ -105,12 +143,15 @@
                             <constraint firstItem="K6s-YP-cT0" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="TPf-8F-Xsa"/>
                             <constraint firstItem="AQm-qv-vn6" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="cmp-tb-m91"/>
                             <constraint firstItem="3fT-NU-8sX" firstAttribute="height" secondItem="5EZ-qb-Rvc" secondAttribute="height" multiplier="0.5" priority="500" id="cyw-cM-hkS"/>
+                            <constraint firstItem="Eg1-JR-KAP" firstAttribute="width" relation="lessThanOrEqual" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.7" id="heM-cU-GT5"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="AQm-qv-vn6" secondAttribute="trailing" id="hmC-K4-Wbv"/>
                             <constraint firstItem="3fT-NU-8sX" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" constant="-40" id="pXA-sL-sSS"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="AQm-qv-vn6" secondAttribute="bottom" id="ui7-hY-y4W"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="latestPokemonCryBtn" destination="jS9-ZO-uKF" id="lZy-fb-3Wg"/>
+                        <outlet property="legacyPokemonCryBtn" destination="3ut-hy-606" id="bSF-Ce-auw"/>
                         <outlet property="loader" destination="K6s-YP-cT0" id="zpa-Al-wWk"/>
                         <outlet property="pokemonImage" destination="cN8-xS-lwW" id="Rz5-Ci-10d"/>
                         <outlet property="pokemonName" destination="Eh4-8T-I2T" id="hhg-wR-bog"/>
@@ -126,6 +167,9 @@
     <resources>
         <namedColor name="AccentColor">
             <color red="0.96078431372549022" green="0.9882352941176471" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="OppositeAccentColor">
+            <color red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="pikapikaYellow">
             <color red="0.98431372549019602" green="0.792156862745098" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

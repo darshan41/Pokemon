@@ -88,6 +88,10 @@
 		BECB5F472B83D4D60069CAAA /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB5F462B83D4D60069CAAA /* Sprite.swift */; };
 		BECB5F492B83D6A40069CAAA /* PokemonVersions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB5F482B83D6A40069CAAA /* PokemonVersions.swift */; };
 		BECB5F592B83ECC20069CAAA /* PokeCryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECB5F582B83ECC20069CAAA /* PokeCryManager.swift */; };
+		BECBB8242B8B8283004014B7 /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8232B8B8283004014B7 /* PageView.swift */; };
+		BECBB8272B8B82D3004014B7 /* PageControlCommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8262B8B82D3004014B7 /* PageControlCommandCenter.swift */; };
+		BECBB8312B8B91DE004014B7 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8302B8B91DE004014B7 /* Stack.swift */; };
+		BECBB8332B8B93CE004014B7 /* ImageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECBB8322B8B93CE004014B7 /* ImageController.swift */; };
 		BEDD3FC22B77F83900B1777A /* ErrorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDD3FC12B77F83900B1777A /* ErrorButton.swift */; };
 		BEDD3FC42B77FF2700B1777A /* GifView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDD3FC32B77FF2700B1777A /* GifView.swift */; };
 		BEDD3FC62B77FF5300B1777A /* pokeball.gif in Resources */ = {isa = PBXBuildFile; fileRef = BEDD3FC52B77FF5300B1777A /* pokeball.gif */; };
@@ -189,6 +193,10 @@
 		BECB5F462B83D4D60069CAAA /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		BECB5F482B83D6A40069CAAA /* PokemonVersions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonVersions.swift; sourceTree = "<group>"; };
 		BECB5F582B83ECC20069CAAA /* PokeCryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeCryManager.swift; sourceTree = "<group>"; };
+		BECBB8232B8B8283004014B7 /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		BECBB8262B8B82D3004014B7 /* PageControlCommandCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControlCommandCenter.swift; sourceTree = "<group>"; };
+		BECBB8302B8B91DE004014B7 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		BECBB8322B8B93CE004014B7 /* ImageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageController.swift; sourceTree = "<group>"; };
 		BEDD3FC12B77F83900B1777A /* ErrorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorButton.swift; sourceTree = "<group>"; };
 		BEDD3FC32B77FF2700B1777A /* GifView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifView.swift; sourceTree = "<group>"; };
 		BEDD3FC52B77FF5300B1777A /* pokeball.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = pokeball.gif; sourceTree = "<group>"; };
@@ -277,6 +285,7 @@
 		BE734AD62B8205BF00DB9EE9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				BECBB8252B8B82B1004014B7 /* PageControl */,
 				BE734AD72B8205D500DB9EE9 /* HomeView.swift */,
 				BE734AD92B8205F400DB9EE9 /* HomeModel.swift */,
 			);
@@ -397,6 +406,8 @@
 		BE99D2A42B752E3400F897F0 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				BECBB82F2B8B91DA004014B7 /* Stack */,
+				BECBB82A2B8B868C004014B7 /* LL */,
 				BE99D2A52B752E4200F897F0 /* Service.swift */,
 				BE9B84BE2B77B15900F36097 /* PokePedia.swift */,
 				BE9B84C22B77B81A00F36097 /* Ability.swift */,
@@ -545,6 +556,31 @@
 				BE99D2D32B75581700F897F0 /* PokemonAPIEnvironment.swift */,
 			);
 			path = Environment;
+			sourceTree = "<group>";
+		};
+		BECBB8252B8B82B1004014B7 /* PageControl */ = {
+			isa = PBXGroup;
+			children = (
+				BECBB8232B8B8283004014B7 /* PageView.swift */,
+				BECBB8262B8B82D3004014B7 /* PageControlCommandCenter.swift */,
+				BECBB8322B8B93CE004014B7 /* ImageController.swift */,
+			);
+			path = PageControl;
+			sourceTree = "<group>";
+		};
+		BECBB82A2B8B868C004014B7 /* LL */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LL;
+			sourceTree = "<group>";
+		};
+		BECBB82F2B8B91DA004014B7 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				BECBB8302B8B91DE004014B7 /* Stack.swift */,
+			);
+			path = Stack;
 			sourceTree = "<group>";
 		};
 		BEDD3FCA2B781E3900B1777A /* Endorsements */ = {
@@ -722,6 +758,8 @@
 				BEA0F1B92B851A530061A65E /* UIBezierPath.swift in Sources */,
 				BE99D2CA2B75512B00F897F0 /* PaginatedResultsView.swift in Sources */,
 				BE7053752B796020000E065D /* TabBarController.swift in Sources */,
+				BECBB8312B8B91DE004014B7 /* Stack.swift in Sources */,
+				BECBB8242B8B8283004014B7 /* PageView.swift in Sources */,
 				BE734AF62B825C7D00DB9EE9 /* RingedCircleView.swift in Sources */,
 				BE9B849E2B778D9900F36097 /* PackedParam.swift in Sources */,
 				BE7053792B7960B2000E065D /* TabBarProtocols.swift in Sources */,
@@ -733,9 +771,11 @@
 				BE7053302B78C82E000E065D /* CoreDataStack.swift in Sources */,
 				BEDD3FC82B78050D00B1777A /* Color.swift in Sources */,
 				BE99D2B32B75347500F897F0 /* ViewEmbedder.swift in Sources */,
+				BECBB8332B8B93CE004014B7 /* ImageController.swift in Sources */,
 				BE99D2AD2B75334200F897F0 /* SearchProtocol.swift in Sources */,
 				BE9B84C32B77B81A00F36097 /* Ability.swift in Sources */,
 				BE734AF82B82639300DB9EE9 /* UILabel.swift in Sources */,
+				BECBB8272B8B82D3004014B7 /* PageControlCommandCenter.swift in Sources */,
 				BE9B84D22B77DF5A00F36097 /* View.swift in Sources */,
 				BE9B84B22B77A90700F36097 /* PublicProtocols.swift in Sources */,
 				BE99D2882B752D9100F897F0 /* AppDelegate.swift in Sources */,
